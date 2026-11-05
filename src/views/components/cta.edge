@@ -1,0 +1,49 @@
+{{-- Closing call to action: heading, a dark terminal with the three getting-started commands (from the README), and the main button. --}}
+<section id="start" class="border-b border-line">
+  <div class="mx-auto max-w-page border-x border-line">
+
+    <div class="px-5 sm:px-8 pt-section text-center lg:px-12">
+      <p class="mb-4"><span class="rounded-tag bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-eyebrow text-accent-fg">Get started</span></p>
+      <h2 class="text-display-sm font-heading text-fg">Start with one model.</h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-fg-muted">
+        Three commands to a running API, admin panel and website. Open the admin, create your first user, and describe your content.
+      </p>
+    </div>
+
+    <div class="stage relative mt-block overflow-hidden px-5 sm:px-8 py-block lg:px-12">
+      <div class="cell-grid absolute inset-0"></div>
+
+      <div x-data="{ copied: false }" class="theme-dark relative mx-auto max-w-xl overflow-hidden rounded-card bg-neutral-900">
+        <div class="tint flex items-center justify-between px-4 py-3">
+          <span class="flex items-center gap-2" aria-hidden="true">
+            <span class="size-2.5 rounded-full bg-white/15"></span>
+            <span class="size-2.5 rounded-full bg-white/15"></span>
+            <span class="size-2.5 rounded-full bg-white/15"></span>
+          </span>
+          <button type="button" class="flex items-center gap-1.5 rounded-tag px-2 py-1 font-mono text-xs text-fg-muted hover:text-fg" aria-label="Copy commands"
+            x-on:click="navigator.clipboard.writeText('bunx @njinlabs/njin create my-web\ncd my-web\nbunx njin dev'); copied = true; setTimeout(() => copied = false, 1500)">
+            <span x-show="!copied">{{{ icon('copy-duotone', 'size-icon-sm') }}}</span>
+            <span x-show="copied" x-cloak class="text-primary">{{{ icon('check-duotone', 'size-icon-sm') }}}</span>
+            <span x-text="copied ? 'Copied' : 'Copy'">Copy</span>
+          </button>
+        </div>
+        <div class="space-y-1.5 px-5 py-5 font-mono text-[13px] leading-relaxed text-fg">
+          <p><span class="text-fg-subtle">$</span> <span class="tk-fn">bunx</span> &#64;njinlabs/njin create my-web</p>
+          <p><span class="text-fg-subtle">$</span> <span class="tk-fn">cd</span> my-web</p>
+          <p><span class="text-fg-subtle">$</span> <span class="tk-fn">bunx</span> njin dev</p>
+          <p class="pt-2 tk-cm"># then open localhost:3000/_admin</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 px-5 sm:px-8 py-block lg:px-12">
+      <a href="/docs" class="inline-flex items-center gap-2 rounded-control border-2 border-ink bg-primary px-5 py-2.5 font-label text-primary-fg shadow-pop hover:bg-primary-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
+        Read the docs {{{ icon('arrow-right-duotone', 'size-icon-md') }}}
+      </a>
+      <a href="https://github.com/njinlabs/njin" class="group inline-flex items-center gap-2 rounded-control px-3 py-2.5 font-label text-fg underline decoration-line-strong decoration-2 underline-offset-8 hover:decoration-primary">
+        {{{ icon('github-logo-duotone', 'size-icon-md') }}} View on GitHub {{{ icon('arrow-up-right-duotone', 'size-icon-sm') }}}
+      </a>
+    </div>
+
+  </div>
+</section>

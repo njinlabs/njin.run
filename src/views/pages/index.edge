@@ -1,0 +1,17 @@
+@component('layouts/main', { path: '/', description: 'Define one Zod model and njin generates the REST API, the admin panel and a server-rendered website. Built on Bun, Elysia and SurrealDB, with MCP for AI agents.' })
+  @slot('title')
+    njin | One model. Everything else, generated.
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: request.path })
+    <main>
+      @!component('components/hero')
+      @!component('components/code-demo')
+      @!component('components/agents')
+      @!component('components/features')
+      @!component('components/cta')
+    </main>
+    @!component('components/footer')
+  @end
+@end

@@ -1,0 +1,59 @@
+@let(tree = await docsNav())
+@let(doc = await docsPage(params.topic, params.page))
+@if(!doc)
+  {{ abort(404) }}
+@end
+
+@component('layouts/main', { path: doc.entry.href, description: doc.entry.description || (doc.entry.title + ' in the njin documentation.') })
+  @slot('title')
+    {{ doc.entry.title }} | njin docs
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: '/docs' })
+    <div class="mx-auto max-w-page border-x border-line lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)_14rem]">
+      @!component('components/docs-sidebar', { tree: tree, current: doc.entry.href })
+
+      <main class="min-w-0 px-5 py-block sm:px-8 lg:px-12">
+        <article class="docs-prose max-w-narrow">{{{ doc.html }}}</article>
+
+        <nav class="mt-section flex max-w-narrow items-stretch gap-3" aria-label="Pagination">
+          @if(doc.prev)
+            <a href="{{ doc.prev.href }}" class="flex shrink-0 items-center gap-2 px-2 text-sm text-fg-muted hover:text-fg" aria-label="Previous: {{ doc.prev.title }}">
+              {{{ icon('caret-left-duotone', 'size-icon-sm') }}}
+              <span class="hidden sm:inline">Previous</span>
+            </a>
+          @end
+          @if(doc.next)
+            <a href="{{ doc.next.href }}" class="group flex min-w-0 flex-1 items-stretch divide-x divide-line overflow-hidden rounded-card border border-line bg-surface-muted hover:border-line-strong" aria-label="Next: {{ doc.next.title }}">
+              <span class="min-w-0 flex-1 px-5 py-4 text-right">
+                <span class="block truncate font-label text-fg">{{ doc.next.title }}</span>
+                @if(doc.next.description)
+                  <span class="mt-0.5 block truncate text-sm text-fg-subtle">{{ doc.next.description }}</span>
+                @end
+              </span>
+              <span class="flex shrink-0 items-center gap-2 px-4 text-sm text-fg-muted group-hover:text-fg sm:px-5">
+                <span class="hidden sm:inline">Next</span>
+                {{{ icon('caret-right-duotone', 'size-icon-sm') }}}
+              </span>
+            </a>
+          @end
+        </nav>
+      </main>
+
+      <aside class="hidden xl:block">
+        @if(doc.headings.length)
+          <nav class="sticky top-16 px-6 py-block" aria-label="On this page">
+            <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">On this page</p>
+            <ul class="mt-3 space-y-1.5 text-sm">
+              @each(h in doc.headings)
+                <li class="{{ h.depth === 3 ? 'pl-3' : '' }}"><a href="#{{ h.id }}" class="text-fg-muted hover:text-fg">{{ h.text }}</a></li>
+              @end
+            </ul>
+          </nav>
+        @end
+      </aside>
+    </div>
+    @!component('components/footer')
+  @end
+@end

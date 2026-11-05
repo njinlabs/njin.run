@@ -1,0 +1,484 @@
+@if(isProduction())
+  {{ abort(404) }}
+@end
+
+@component('layouts/main', { path: '/token', noindex: true })
+  @slot('title')
+    njin | design tokens
+  @end
+
+  @slot('main')
+    @let(scales = [
+        { name: 'brand', note: 'From the logo', steps: [
+          { n: 50, bg: 'bg-brand-50', hex: '#f1f9f5' },
+          { n: 100, bg: 'bg-brand-100', hex: '#dcf1e8' },
+          { n: 200, bg: 'bg-brand-200', hex: '#a5d3c0' },
+          { n: 300, bg: 'bg-brand-300', hex: '#78b39b' },
+          { n: 400, bg: 'bg-brand-400', hex: '#5f9e86' },
+          { n: 500, bg: 'bg-brand-500', hex: '#468a71' },
+          { n: 600, bg: 'bg-brand-600', hex: '#2b725a' },
+          { n: 700, bg: 'bg-brand-700', hex: '#186049' },
+          { n: 800, bg: 'bg-brand-800', hex: '#054b37' },
+          { n: 900, bg: 'bg-brand-900', hex: '#003727' },
+          { n: 950, bg: 'bg-brand-950', hex: '#002417' }
+        ] },
+        { name: 'accent', note: 'Orange, anchored on #ff8c52', steps: [
+          { n: 50, bg: 'bg-accent-50', hex: '#fff4ef' },
+          { n: 100, bg: 'bg-accent-100', hex: '#ffdfd0' },
+          { n: 200, bg: 'bg-accent-200', hex: '#ffc7ad' },
+          { n: 300, bg: 'bg-accent-300', hex: '#fdae88' },
+          { n: 400, bg: 'bg-accent-400', hex: '#ff8c52' },
+          { n: 500, bg: 'bg-accent-500', hex: '#de6e32' },
+          { n: 600, bg: 'bg-accent-600', hex: '#bc5518' },
+          { n: 700, bg: 'bg-accent-700', hex: '#994004' },
+          { n: 800, bg: 'bg-accent-800', hex: '#762e00' },
+          { n: 900, bg: 'bg-accent-900', hex: '#532002' },
+          { n: 950, bg: 'bg-accent-950', hex: '#341101' }
+        ] },
+        { name: 'neutral', note: 'Gray, green tint', steps: [
+          { n: 50, bg: 'bg-neutral-50', hex: '#f5f7f6' },
+          { n: 100, bg: 'bg-neutral-100', hex: '#e8edeb' },
+          { n: 200, bg: 'bg-neutral-200', hex: '#d3dbd8' },
+          { n: 300, bg: 'bg-neutral-300', hex: '#b4c0bc' },
+          { n: 400, bg: 'bg-neutral-400', hex: '#96a5a0' },
+          { n: 500, bg: 'bg-neutral-500', hex: '#63726c' },
+          { n: 600, bg: 'bg-neutral-600', hex: '#53605c' },
+          { n: 700, bg: 'bg-neutral-700', hex: '#414c48' },
+          { n: 800, bg: 'bg-neutral-800', hex: '#2c3532' },
+          { n: 900, bg: 'bg-neutral-900', hex: '#1b2220' },
+          { n: 950, bg: 'bg-neutral-950', hex: '#0f1412' }
+        ] },
+        { name: 'success', note: 'Same as brand', steps: [
+          { n: 50, bg: 'bg-success-50', hex: '#f1f9f5' },
+          { n: 100, bg: 'bg-success-100', hex: '#dcf1e8' },
+          { n: 200, bg: 'bg-success-200', hex: '#a5d3c0' },
+          { n: 300, bg: 'bg-success-300', hex: '#78b39b' },
+          { n: 400, bg: 'bg-success-400', hex: '#5f9e86' },
+          { n: 500, bg: 'bg-success-500', hex: '#468a71' },
+          { n: 600, bg: 'bg-success-600', hex: '#2b725a' },
+          { n: 700, bg: 'bg-success-700', hex: '#186049' },
+          { n: 800, bg: 'bg-success-800', hex: '#054b37' },
+          { n: 900, bg: 'bg-success-900', hex: '#003727' },
+          { n: 950, bg: 'bg-success-950', hex: '#002417' }
+        ] },
+        { name: 'warning', note: 'Amber', steps: [
+          { n: 50, bg: 'bg-warning-50', hex: '#fff6e5' },
+          { n: 100, bg: 'bg-warning-100', hex: '#ffe8c0' },
+          { n: 200, bg: 'bg-warning-200', hex: '#fccd74' },
+          { n: 300, bg: 'bg-warning-300', hex: '#ecb542' },
+          { n: 400, bg: 'bg-warning-400', hex: '#d89e09' },
+          { n: 500, bg: 'bg-warning-500', hex: '#bd8a02' },
+          { n: 600, bg: 'bg-warning-600', hex: '#9f7307' },
+          { n: 700, bg: 'bg-warning-700', hex: '#795806' },
+          { n: 800, bg: 'bg-warning-800', hex: '#533a01' },
+          { n: 900, bg: 'bg-warning-900', hex: '#3d2a00' },
+          { n: 950, bg: 'bg-warning-950', hex: '#291a00' }
+        ] },
+        { name: 'danger', note: 'Red', steps: [
+          { n: 50, bg: 'bg-danger-50', hex: '#fff4f3' },
+          { n: 100, bg: 'bg-danger-100', hex: '#ffe4e1' },
+          { n: 200, bg: 'bg-danger-200', hex: '#feb0a9' },
+          { n: 300, bg: 'bg-danger-300', hex: '#fe716b' },
+          { n: 400, bg: 'bg-danger-400', hex: '#f14d4c' },
+          { n: 500, bg: 'bg-danger-500', hex: '#d83438' },
+          { n: 600, bg: 'bg-danger-600', hex: '#b71824' },
+          { n: 700, bg: 'bg-danger-700', hex: '#9a0e1b' },
+          { n: 800, bg: 'bg-danger-800', hex: '#7a0712' },
+          { n: 900, bg: 'bg-danger-900', hex: '#58090e' },
+          { n: 950, bg: 'bg-danger-950', hex: '#3b0708' }
+        ] },
+        { name: 'info', note: 'Blue', steps: [
+          { n: 50, bg: 'bg-info-50', hex: '#f0f8ff' },
+          { n: 100, bg: 'bg-info-100', hex: '#dbeeff' },
+          { n: 200, bg: 'bg-info-200', hex: '#94ceff' },
+          { n: 300, bg: 'bg-info-300', hex: '#4aacf7' },
+          { n: 400, bg: 'bg-info-400', hex: '#2696e4' },
+          { n: 500, bg: 'bg-info-500', hex: '#0380ca' },
+          { n: 600, bg: 'bg-info-600', hex: '#0068a6' },
+          { n: 700, bg: 'bg-info-700', hex: '#02568a' },
+          { n: 800, bg: 'bg-info-800', hex: '#00426c' },
+          { n: 900, bg: 'bg-info-900', hex: '#003050' },
+          { n: 950, bg: 'bg-info-950', hex: '#001f37' }
+        ] }
+      ])
+
+    @let(logoColors = [
+      { token: 'brand-200', hex: '#a5d3c0', role: 'Wordmark in dark mode, panel', bg: 'bg-brand-200', fg: 'text-brand-950' },
+      { token: 'brand-300', hex: '#78b39b', role: 'Dots, panel', bg: 'bg-brand-300', fg: 'text-brand-950' },
+      { token: 'brand-500', hex: '#468a71', role: 'Panel', bg: 'bg-brand-500', fg: 'text-white' },
+      { token: 'brand-600', hex: '#2b725a', role: 'Panel in dark mode', bg: 'bg-brand-600', fg: 'text-white' },
+      { token: 'brand-700', hex: '#186049', role: 'Wordmark in light mode', bg: 'bg-brand-700', fg: 'text-white' }
+    ])
+
+    @let(roles = [
+      { name: 'primary', note: 'Main actions', btn: 'bg-primary text-primary-fg hover:bg-primary-hover active:bg-primary-active', soft: 'bg-primary-soft text-primary-soft-fg border-primary-line' },
+      { name: 'accent', note: 'Highlights', btn: 'bg-accent text-accent-fg hover:bg-accent-hover active:bg-accent-active', soft: 'bg-accent-soft text-accent-soft-fg border-accent-line' },
+      { name: 'success', note: 'Saved, published', btn: 'bg-success text-success-fg hover:bg-success-hover active:bg-success-active', soft: 'bg-success-soft text-success-soft-fg border-success-line' },
+      { name: 'warning', note: 'Needs attention', btn: 'bg-warning text-warning-fg hover:bg-warning-hover active:bg-warning-active', soft: 'bg-warning-soft text-warning-soft-fg border-warning-line' },
+      { name: 'danger', note: 'Destructive, errors', btn: 'bg-danger text-danger-fg hover:bg-danger-hover active:bg-danger-active', soft: 'bg-danger-soft text-danger-soft-fg border-danger-line' },
+      { name: 'info', note: 'Neutral notices', btn: 'bg-info text-info-fg hover:bg-info-hover active:bg-info-active', soft: 'bg-info-soft text-info-soft-fg border-info-line' }
+    ])
+
+    @let(displaySizes = [
+      { name: 'display-lg', cls: 'text-display-lg font-extrabold', sample: 'One model' },
+      { name: 'display-md', cls: 'text-display-md font-extrabold', sample: 'One model' },
+      { name: 'display-sm', cls: 'text-display-sm font-bold', sample: 'One model' }
+    ])
+
+    @let(textSizes = [
+      { name: '4xl', cls: 'text-4xl font-bold', sample: 'API, admin, website' },
+      { name: '3xl', cls: 'text-3xl font-bold', sample: 'API, admin, website' },
+      { name: '2xl', cls: 'text-2xl font-semibold', sample: 'API, admin, website' },
+      { name: 'xl', cls: 'text-xl font-semibold', sample: 'API, admin, website' },
+      { name: 'lg', cls: 'text-lg', sample: 'Describe a model once.' },
+      { name: 'base', cls: 'text-base', sample: 'Describe a model once.' },
+      { name: 'sm', cls: 'text-sm', sample: 'Describe a model once.' },
+      { name: 'xs', cls: 'text-xs', sample: 'Describe a model once.' }
+    ])
+
+    <main class="space-y-block bg-surface-muted px-gutter py-block">
+
+      {{-- 01 Cover --}}
+      <section class="mx-auto grid aspect-video w-full max-w-page grid-cols-3 overflow-hidden rounded-panel border border-line bg-surface">
+        <div class="col-span-2 flex flex-col justify-between p-12">
+          <img src="{{ vite.static('logo.svg') }}" alt="njin" class="h-10 w-auto self-start" />
+          <div>
+            <p class="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-eyebrow text-fg-muted">
+              <span class="border-2 border-ink bg-accent px-1.5 py-0.5 font-bold text-accent-fg shadow-pop">New</span>
+              Brand tokens v0.1
+            </p>
+            <h1 class="text-display-lg font-extrabold text-fg">
+              Colors &amp;<br />type for <span class="text-accent-text">njin</span>.
+            </h1>
+            <p class="mt-5 max-w-md text-lg text-fg-muted">
+              One model in, a full API, admin panel and website out. These are the tokens that make it look like one product.
+            </p>
+          </div>
+          <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">Figtree · JetBrains Mono · Green from the logo</p>
+        </div>
+        <div class="grid grid-rows-5">
+          @each(c in logoColors)
+            <div class="{{ c.bg }} {{ c.fg }} flex items-center justify-between px-6 font-mono text-xs uppercase tracking-eyebrow">
+              <span>{{ c.token }}</span>
+              <span>{{ c.hex }}</span>
+            </div>
+          @end
+        </div>
+      </section>
+
+      {{-- 02 Logo --}}
+      @component('components/slide', { eyebrow: '01 · Logo', title: 'The mark', no: '02 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-3 gap-6">
+            <div class="col-span-2 flex items-center justify-center rounded-card border-2 border-ink bg-surface shadow-lift">
+              <img src="{{ vite.static('logo.svg') }}" alt="njin logo" class="h-28 w-auto" />
+            </div>
+            <div class="grid grid-rows-2 gap-6">
+              <div class="flex items-center justify-center gap-6 rounded-card border border-line bg-surface-muted">
+                <img src="{{ vite.static('favicon.svg') }}" alt="" class="h-16 w-16" />
+                <img src="{{ vite.static('favicon.svg') }}" alt="" class="h-10 w-10" />
+                <img src="{{ vite.static('favicon.svg') }}" alt="" class="h-6 w-6" />
+              </div>
+              <div class="rounded-card border border-line bg-surface-muted p-5">
+                <p class="font-semibold text-fg">Switches with the theme</p>
+                <p class="mt-1 text-sm text-fg-muted">Dark green on light, light green on dark. The whole palette follows the same rule.</p>
+              </div>
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 03 Brand colors --}}
+      @component('components/slide', { eyebrow: '02 · Color', title: 'Brand green', no: '03 / 12' })
+        @slot('main')
+          <div class="flex h-full flex-col gap-6">
+            <div class="grid flex-1 grid-cols-5 gap-3">
+              @each(c in logoColors)
+                <div class="{{ c.bg }} {{ c.fg }} flex flex-col justify-end rounded-card p-4">
+                  <p class="font-bold">{{ c.token }}</p>
+                  <p class="font-mono text-xs uppercase">{{ c.hex }}</p>
+                  <p class="mt-1 text-xs">{{ c.role }}</p>
+                </div>
+              @end
+            </div>
+            <div>
+              <p class="mb-2 text-sm text-fg-muted">Full scale. 200, 300, 500, 600, 700 are exact logo colors; the rest are derived.</p>
+              <div class="grid grid-cols-11 gap-1">
+                @each(step in scales[0].steps)
+                  <div>
+                    <div class="{{ step.bg }} h-12 rounded-control"></div>
+                    <p class="mt-1 font-mono text-xs text-fg-muted">{{ step.n }}</p>
+                  </div>
+                @end
+              </div>
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 04 Neutral + Accent --}}
+      @component('components/slide', { eyebrow: '02 · Color', title: 'Neutral & accent', no: '04 / 12' })
+        @slot('main')
+          <div class="flex h-full flex-col justify-between gap-4">
+            @each(scale in [scales[2], scales[1]])
+              <div>
+                <p class="mb-2 text-sm"><span class="font-bold capitalize text-fg">{{ scale.name }}</span> <span class="text-fg-muted">· {{ scale.note }}</span></p>
+                <div class="grid grid-cols-11 gap-1">
+                  @each(step in scale.steps)
+                    <div>
+                      <div class="{{ step.bg }} h-16 rounded-control"></div>
+                      <p class="mt-1 font-mono text-xs text-fg">{{ step.n }}</p>
+                      <p class="font-mono text-xs text-fg-subtle">{{ step.hex }}</p>
+                    </div>
+                  @end
+                </div>
+              </div>
+            @end
+          </div>
+        @end
+      @end
+
+      {{-- 05 Status --}}
+      @component('components/slide', { eyebrow: '02 · Color', title: 'Status', no: '05 / 12' })
+        @slot('main')
+          <div class="flex h-full flex-col justify-between gap-3">
+            @each(scale in [scales[4], scales[5], scales[6]])
+              <div>
+                <p class="mb-2 text-sm"><span class="font-bold capitalize text-fg">{{ scale.name }}</span> <span class="text-fg-muted">· {{ scale.note }}</span></p>
+                <div class="grid grid-cols-11 gap-1">
+                  @each(step in scale.steps)
+                    <div>
+                      <div class="{{ step.bg }} h-12 rounded-control"></div>
+                      <p class="mt-1 font-mono text-xs text-fg">{{ step.n }}</p>
+                      <p class="font-mono text-xs text-fg-subtle">{{ step.hex }}</p>
+                    </div>
+                  @end
+                </div>
+              </div>
+            @end
+            <p class="text-sm text-fg-muted">Success reuses the brand green.</p>
+          </div>
+        @end
+      @end
+
+      {{-- 06 Roles --}}
+      @component('components/slide', { eyebrow: '03 · Semantic', title: 'Roles', no: '06 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-3 grid-rows-2 gap-4">
+            @each(r in roles)
+              <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-4">
+                <p class="text-sm"><span class="font-bold capitalize text-fg">{{ r.name }}</span> <span class="text-fg-muted">· {{ r.note }}</span></p>
+                <button type="button" class="{{ r.btn }} rounded-control border-2 border-ink px-4 py-2 text-sm font-semibold capitalize shadow-pop active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">{{ r.name }}</button>
+                <div class="{{ r.soft }} rounded-control border px-3 py-2 text-sm">Soft block</div>
+              </div>
+            @end
+          </div>
+        @end
+      @end
+
+      {{-- 07 Surfaces, text, controls --}}
+      @component('components/slide', { eyebrow: '03 · Semantic', title: 'Surfaces, text & controls', no: '07 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-2 gap-6">
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-5">
+              <p class="text-fg">Default <span class="font-mono text-sm">text-fg</span></p>
+              <p class="text-fg-muted">Muted <span class="font-mono text-sm">text-fg-muted</span></p>
+              <p class="text-fg-subtle">Subtle <span class="font-mono text-sm">text-fg-subtle</span></p>
+              <p><a href="#" class="font-medium text-link underline hover:text-link-hover">Link <span class="font-mono text-sm">text-link</span></a></p>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="rounded-control border border-line bg-surface p-2 text-xs text-fg-muted">surface</div>
+                <div class="rounded-control border border-line bg-surface-muted p-2 text-xs text-fg-muted">muted</div>
+                <div class="rounded-control border border-line bg-surface-raised p-2 text-xs text-fg-muted">raised</div>
+              </div>
+            </div>
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-5">
+              <div class="flex gap-2">
+                <button type="button" class="rounded-control border-2 border-ink bg-secondary px-4 py-2 text-sm font-semibold text-secondary-fg hover:bg-secondary-hover active:bg-secondary-active">Secondary</button>
+                <button type="button" disabled class="rounded-control border-2 border-line bg-disabled px-4 py-2 text-sm font-semibold text-disabled-fg">Disabled</button>
+              </div>
+              <input type="text" placeholder="Focus me" class="w-full rounded-control border-2 border-ink bg-surface px-3 py-2 text-sm text-fg" />
+              <div class="rounded-control border-2 border-ink bg-inverse p-4 shadow-pop">
+                <p class="font-semibold text-inverse-fg">Inverse block</p>
+                <p class="text-sm text-inverse-muted">For hero strips and footers.</p>
+              </div>
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 08 Fonts --}}
+      @component('components/slide', { eyebrow: '04 · Typography', title: 'Typefaces', no: '08 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-2 gap-6">
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-6">
+              <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">font-sans · Figtree</p>
+              <p class="text-display-lg font-extrabold text-fg">Aa Gg</p>
+              <div>
+                <p class="text-lg text-fg-muted">Quick brown fox jumps over the lazy dog.</p>
+                <p class="mt-1 text-sm text-fg-subtle">Headings, body, UI. Weights 300–900.</p>
+              </div>
+            </div>
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-6">
+              <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">font-mono · JetBrains Mono</p>
+              <p class="font-mono text-display-lg font-bold text-fg">Aa Gg</p>
+              <div>
+                <p class="font-mono text-sm text-fg-muted">const post = makeModel("post", {...})</p>
+                <p class="mt-1 text-sm text-fg-subtle">Code, commands, numbers, small labels.</p>
+              </div>
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 09 Scale --}}
+      @component('components/slide', { eyebrow: '04 · Typography', title: 'Type scale', no: '09 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-2 gap-8">
+            <div class="flex flex-col justify-between border-r border-line pr-8">
+              @each(s in displaySizes)
+                <div>
+                  <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">text-{{ s.name }}</p>
+                  <p class="{{ s.cls }} text-fg">{{ s.sample }}</p>
+                </div>
+              @end
+            </div>
+            <div class="flex flex-col justify-between">
+              @each(s in textSizes)
+                <div class="flex items-baseline justify-between gap-4">
+                  <p class="{{ s.cls }} text-fg">{{ s.sample }}</p>
+                  <p class="shrink-0 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">{{ s.name }}</p>
+                </div>
+              @end
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 10 Shape --}}
+      @component('components/slide', { eyebrow: '05 · Shape', title: 'Radius, border & focus', no: '10 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-2 gap-6">
+            <div class="flex flex-col gap-4">
+              <p class="text-sm text-fg-muted">Corners follow the logo: crisp on the stems, curved only where the logo curves. Controls get a 2px ink border, containers a quiet 1px line. Hard shadow is small and rare: solid buttons, and one featured block per view.</p>
+              <div class="grid flex-1 grid-cols-4 gap-3">
+                <div class="flex flex-col justify-between rounded-tag border border-line-strong bg-surface-muted p-3">
+                  <p class="font-mono text-xs uppercase text-fg-subtle">2px</p>
+                  <p class="text-sm font-label text-fg">tag</p>
+                </div>
+                <div class="flex flex-col justify-between rounded-control border border-line-strong bg-surface-muted p-3">
+                  <p class="font-mono text-xs uppercase text-fg-subtle">4px</p>
+                  <p class="text-sm font-label text-fg">control</p>
+                </div>
+                <div class="flex flex-col justify-between rounded-card border border-line-strong bg-surface-muted p-3">
+                  <p class="font-mono text-xs uppercase text-fg-subtle">8px</p>
+                  <p class="text-sm font-label text-fg">card</p>
+                </div>
+                <div class="flex flex-col justify-between rounded-panel border border-line-strong bg-surface-muted p-3">
+                  <p class="font-mono text-xs uppercase text-fg-subtle">12px</p>
+                  <p class="text-sm font-label text-fg">panel</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-4">
+                <div class="rounded-control border-2 border-ink bg-surface-muted px-3 py-2">
+                  <p class="font-mono text-xs uppercase text-fg-subtle">default</p>
+                  <p class="text-sm font-label text-fg">flat</p>
+                </div>
+                <div class="rounded-control border-2 border-ink bg-primary px-3 py-2 shadow-pop">
+                  <p class="font-mono text-xs uppercase text-primary-fg">2px</p>
+                  <p class="text-sm font-label text-primary-fg">shadow-pop</p>
+                </div>
+                <div class="rounded-card border-2 border-ink bg-accent px-3 py-2 shadow-lift">
+                  <p class="font-mono text-xs uppercase text-accent-fg">4px</p>
+                  <p class="text-sm font-label text-accent-fg">shadow-lift</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-5">
+              <div class="flex items-center gap-3">
+                <div class="h-0 w-16 border-t border-line-strong"></div>
+                <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">border · 1px</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="h-0 w-16 border-t-2 border-ink"></div>
+                <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">border-2 border-ink · controls</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="h-0 w-16 border-t-2 border-primary"></div>
+                <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">border-2 border-primary · emphasis</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button" class="rounded-control border-2 border-ink bg-secondary px-4 py-2 text-sm font-label text-secondary-fg outline-2 outline-offset-2 outline-ring">Focused</button>
+                <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">outline 2px + offset 2px</p>
+              </div>
+              <div class="grid grid-cols-4 gap-2 text-fg">
+                <p class="text-lg font-heading">Heading</p>
+                <p class="text-lg font-title">Title</p>
+                <p class="text-lg font-label">Label</p>
+                <p class="text-lg font-body">Body</p>
+              </div>
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 11 Layout --}}
+      @component('components/slide', { eyebrow: '06 · Layout', title: 'Spacing & width', no: '11 / 12' })
+        @slot('main')
+          <div class="grid h-full grid-cols-2 gap-6">
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-5">
+              <p class="text-sm text-fg-muted">Named spacing for page rhythm. Everything else uses the standard 4px scale.</p>
+              <div class="flex items-center gap-4"><div class="h-4 w-gutter bg-primary"></div><p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">gutter · 24px · px-gutter</p></div>
+              <div class="flex items-center gap-4"><div class="h-4 w-block bg-primary"></div><p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">block · 48px · gap-block</p></div>
+              <div class="flex items-center gap-4"><div class="h-4 w-section bg-primary"></div><p class="font-mono text-xs uppercase tracking-eyebrow text-fg-muted">section · 80px · py-section</p></div>
+            </div>
+            <div class="flex flex-col justify-between rounded-card border border-line bg-surface-raised p-5">
+              <p class="text-sm text-fg-muted">Container widths and breakpoints.</p>
+              <div class="space-y-2 font-mono text-xs uppercase tracking-eyebrow text-fg-muted">
+                <p><span class="text-fg">max-w-narrow</span> · 768px · articles</p>
+                <p><span class="text-fg">max-w-page</span> · 1152px · default</p>
+                <p><span class="text-fg">max-w-wide</span> · 1440px · dashboards</p>
+              </div>
+              <div class="space-y-2 font-mono text-xs uppercase tracking-eyebrow text-fg-muted">
+                <p><span class="text-fg">sm</span> 640 · <span class="text-fg">md</span> 768 · <span class="text-fg">lg</span> 1024</p>
+                <p><span class="text-fg">xl</span> 1280 · <span class="text-fg">2xl</span> 1536</p>
+              </div>
+            </div>
+          </div>
+        @end
+      @end
+
+      {{-- 12 Icons --}}
+      @component('components/slide', { eyebrow: '07 · Icons', title: 'Phosphor Duotone', no: '12 / 12' })
+        @slot('main')
+          <div class="flex h-full flex-col justify-between gap-4">
+            <p class="text-sm text-fg-muted">
+              Phosphor Duotone via Iconify, one weight everywhere. Rendered inline on the server with
+              <code class="font-mono text-fg">icon('name-duotone', 'size-icon-md')</code>, colored with text-*.
+            </p>
+            <div class="grid grid-cols-8 gap-3">
+              @each(name in ['house-duotone', 'database-duotone', 'code-duotone', 'palette-duotone', 'gear-duotone', 'users-duotone', 'image-duotone', 'magnifying-glass-duotone', 'plus-duotone', 'pencil-simple-duotone', 'trash-duotone', 'check-duotone', 'x-duotone', 'arrow-right-duotone', 'warning-duotone', 'info-duotone'])
+                <div class="flex flex-col items-center gap-2 rounded-card border border-line bg-surface-muted py-4 text-fg">
+                  {{{ icon(name, 'size-icon-lg') }}}
+                  <p class="font-mono text-xs text-fg-subtle">{{ name.replace('-duotone', '') }}</p>
+                </div>
+              @end
+            </div>
+            <div class="flex items-center gap-6 rounded-card border border-line bg-surface-raised px-5 py-4 text-fg">
+              <span class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">sizes</span>
+              {{{ icon('rocket-launch-duotone', 'size-icon-sm') }}} <span class="font-mono text-xs">sm 16</span>
+              {{{ icon('rocket-launch-duotone', 'size-icon-md') }}} <span class="font-mono text-xs">md 20</span>
+              {{{ icon('rocket-launch-duotone', 'size-icon-lg') }}} <span class="font-mono text-xs">lg 24</span>
+              {{{ icon('rocket-launch-duotone', 'size-icon-xl') }}} <span class="font-mono text-xs">xl 32</span>
+              <span class="ml-auto flex items-center gap-4">
+                <span class="text-primary">{{{ icon('check-circle-duotone', 'size-icon-lg') }}}</span>
+                <span class="text-accent-text">{{{ icon('star-duotone', 'size-icon-lg') }}}</span>
+                <span class="text-danger">{{{ icon('warning-duotone', 'size-icon-lg') }}}</span>
+              </span>
+            </div>
+          </div>
+        @end
+      @end
+
+    </main>
+  @end
+@end

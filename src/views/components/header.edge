@@ -1,0 +1,44 @@
+{{-- Sticky site header. Active link follows request.path. --}}
+@let(links = [
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'AI agents', href: '/#agents' },
+  { label: 'Features', href: '/#features' },
+  { label: 'Docs', href: '/docs' }
+])
+
+<header x-data="{ open: false }" class="sticky top-0 z-40 border-b border-line bg-surface-glass backdrop-blur-glass">
+  <div class="mx-auto flex h-16 max-w-page items-center justify-between border-x border-line px-5 sm:px-8 lg:px-12">
+    <a href="/" class="flex items-center" aria-label="njin home">
+      <img src="{{ vite.static('logo.svg') }}" alt="njin" class="h-7 w-auto" />
+    </a>
+
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Main">
+      @each(link in links)
+        <a href="{{ link.href }}" class="{{ path === link.href ? 'text-fg' : 'text-fg-muted' }} rounded-control px-3 py-2 text-sm font-label hover:text-fg">{{ link.label }}</a>
+      @end
+    </nav>
+
+    <div class="hidden items-center gap-3 md:flex">
+      <a href="https://github.com/njinlabs/njin" class="inline-flex items-center gap-2 rounded-control px-3 py-2 text-sm font-label text-fg-muted hover:text-fg">
+        {{{ icon('github-logo-duotone', 'size-icon-md') }}} GitHub
+      </a>
+      <a href="/docs" class="inline-flex items-center gap-2 rounded-control bg-primary px-4 py-1.5 text-sm font-label text-primary-fg hover:bg-primary-hover active:bg-primary-active">
+        Get started
+      </a>
+    </div>
+
+    <button type="button" class="inline-flex items-center justify-center rounded-control border border-line-strong p-2 text-fg md:hidden" x-on:click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+      <span x-show="!open">{{{ icon('list-duotone', 'size-icon-md') }}}</span>
+      <span x-show="open" x-cloak>{{{ icon('x-duotone', 'size-icon-md') }}}</span>
+    </button>
+  </div>
+
+  <div x-show="open" x-cloak x-transition.opacity class="border-t border-line bg-surface md:hidden">
+    <nav class="mx-auto flex max-w-page flex-col gap-1 px-gutter py-4" aria-label="Mobile">
+      @each(link in links)
+        <a href="{{ link.href }}" x-on:click="open = false" class="rounded-control px-3 py-2 font-label text-fg-muted hover:bg-surface-muted hover:text-fg">{{ link.label }}</a>
+      @end
+      <a href="/docs" class="mt-2 inline-flex items-center justify-center rounded-control bg-primary px-4 py-2 font-label text-primary-fg hover:bg-primary-hover">Get started</a>
+    </nav>
+  </div>
+</header>

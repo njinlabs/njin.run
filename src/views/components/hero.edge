@@ -1,0 +1,82 @@
+{{-- Landing hero: headline, CTAs, and an isometric layer-tower animation (styles: .tw-* in app.css). --}}
+@let(layers = [
+  { label: 'Database', z: 0, h: 26, c: 'var(--secondary-active)', cf: 'var(--secondary-fg)', mark: false },
+  { label: 'Model', z: 26, h: 62, c: 'var(--primary)', cf: 'var(--primary-fg)', big: true },
+  { label: 'REST API', z: 88, h: 28, c: 'var(--primary-soft)', cf: 'var(--primary-soft-fg)' },
+  { label: 'Admin panel', z: 116, h: 28, c: 'var(--surface-raised)', cf: 'var(--fg)' },
+  { label: 'Website', z: 144, h: 28, c: 'var(--inverse)', cf: 'var(--inverse-fg)' },
+  { label: 'MCP · Agents', z: 172, h: 28, c: 'var(--accent)', cf: 'var(--accent-fg)', mark: true }
+])
+@let(routes = [
+  { y: -64, px: 40, label: '/api/post', dl: '0s' },
+  { y: 0, px: 120, label: '/_admin', dl: '1.1s' },
+  { y: 64, px: 20, label: '/blog/:slug', dl: '2.2s' }
+])
+
+<section class="relative overflow-hidden border-b border-line">
+  <div class="mx-auto grid max-w-page items-center gap-block overflow-hidden border-x border-line px-5 sm:px-8 py-section lg:px-12 lg:grid-cols-2">
+
+    <div class="min-w-0">
+      <p class="mb-6 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-eyebrow text-fg-muted">
+        <span class="rounded-tag bg-accent px-1.5 py-0.5 font-bold text-accent-fg">New</span>
+        Built for AI agents
+      </p>
+
+      <h1 class="text-display-md font-heading text-fg">
+        One <span class="text-accent-text">model</span>.<br />
+        Everything else,<br />
+        generated.
+      </h1>
+
+      <p class="mt-6 max-w-lg text-lg text-fg-muted">
+        Define your content once, in TypeScript with Zod. njin generates the REST API, an admin panel and server-rendered pages, then opens it all to AI agents over MCP.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a href="/docs" class="inline-flex items-center gap-2 rounded-control border-2 border-ink bg-primary px-5 py-2.5 font-label text-primary-fg shadow-pop hover:bg-primary-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
+          Get started {{{ icon('arrow-right-duotone', 'size-icon-md') }}}
+        </a>
+        <a href="https://github.com/njinlabs/njin" class="group -ml-3 inline-flex items-center gap-2 rounded-control px-3 py-2.5 font-label text-fg underline sm:ml-0 decoration-line-strong decoration-2 underline-offset-8 hover:decoration-primary">
+          {{{ icon('github-logo-duotone', 'size-icon-md') }}} View on GitHub {{{ icon('arrow-up-right-duotone', 'size-icon-sm') }}}
+        </a>
+      </div>
+      <div x-data="{ copied: false }" class="mt-6 inline-flex items-center gap-3 rounded-control border border-line-strong bg-surface-muted py-2 pl-4 pr-2 font-mono text-xs text-fg sm:text-sm">
+        <span class="text-fg-subtle">$</span>
+        <span>bunx @njinlabs/njin create my-web</span>
+        <button type="button" class="rounded-tag p-1.5 text-fg-muted hover:bg-secondary-hover hover:text-fg" aria-label="Copy command"
+          x-on:click="navigator.clipboard.writeText('bunx @njinlabs/njin create my-web'); copied = true; setTimeout(() => copied = false, 1500)">
+          <span x-show="!copied">{{{ icon('copy-duotone', 'size-icon-md') }}}</span>
+          <span x-show="copied" x-cloak class="text-primary">{{{ icon('check-duotone', 'size-icon-md') }}}</span>
+        </button>
+      </div>
+    </div>
+
+    <figure class="relative hidden w-full min-w-0 sm:block" role="img" aria-label="One model at the center, with a database below and a REST API, admin panel, website and MCP endpoint generated on top.">
+      <div class="tw-stage" aria-hidden="true">
+        <div class="tw-scene">
+          <div class="tw-floor"></div>
+          <div class="tw-shadow"></div>
+
+          @each(r in routes)
+            <div class="tw-route" style="--y: {{ r.y }}">
+              <span class="tw-pill" style="--px: {{ r.px }}">{{ r.label }}</span>
+              <span class="tw-dot" style="--dl: {{ r.dl }}"></span>
+            </div>
+          @end
+
+          @each((l, i) in layers)
+            <div class="tw-slab" style="--i: {{ i }}; --z: {{ l.z }}; --h: {{ l.h }}; --c: {{ l.c }}; --cf: {{ l.cf }}">
+              <div class="tw-left"></div>
+              <div class="tw-right {{ l.big ? 'tw-big' : '' }}">{{ l.label }}</div>
+              <div class="tw-top"></div>
+              @if(l.mark)
+                <img src="{{ vite.static('favicon.svg') }}" alt="" class="tw-mark" />
+              @end
+            </div>
+          @end
+        </div>
+      </div>
+    </figure>
+
+  </div>
+</section>

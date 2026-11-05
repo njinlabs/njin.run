@@ -1,0 +1,35 @@
+{{-- Docs navigation. Props: tree (from docsNav()), current (href of the active page, optional). Drawer on mobile. --}}
+<div x-data="{ open: false }" class="lg:contents">
+  <div class="flex items-stretch border-b border-line lg:hidden">
+    <button type="button" class="flex flex-1 items-center justify-between px-5 py-3 text-sm font-label text-fg" x-on:click="open = !open" :aria-expanded="open">
+      <span>Documentation menu</span>
+      <span x-show="!open">{{{ icon('list-duotone', 'size-icon-md') }}}</span>
+      <span x-show="open" x-cloak>{{{ icon('x-duotone', 'size-icon-md') }}}</span>
+    </button>
+    <button type="button" class="flex items-center border-l border-line px-4 text-fg" x-on:click="$dispatch('docs-search-open')" aria-label="Search the documentation">
+      {{{ icon('magnifying-glass-duotone', 'size-icon-md') }}}
+    </button>
+  </div>
+
+  <aside class="border-b border-line lg:border-b-0 lg:border-r" :class="open ? 'block' : 'hidden lg:block'">
+    <nav class="px-5 py-6 sm:px-8 lg:sticky lg:top-16 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto lg:px-6" aria-label="Documentation">
+      <button type="button" class="mb-6 hidden w-full items-center gap-2 rounded-control border border-line px-3 py-2 text-sm text-fg-muted hover:border-line-strong hover:text-fg lg:flex" x-on:click="$dispatch('docs-search-open')">
+        {{{ icon('magnifying-glass-duotone', 'size-icon-sm') }}}
+        <span>Search</span>
+        <kbd class="ml-auto rounded-tag border border-line px-1.5 py-0.5 font-mono text-xs text-fg-subtle">Ctrl K</kbd>
+      </button>
+      @each((section, idx) in tree)
+        <p class="{{ idx === 0 ? '' : 'mt-6' }} font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">{{ section.title }}</p>
+        <ul class="mt-2 space-y-0.5">
+          @each(item in section.pages)
+            <li>
+              <a href="{{ item.href }}" class="{{ typeof current !== 'undefined' && current === item.href ? 'bg-primary-soft text-primary-soft-fg font-label' : 'text-fg-muted hover:text-fg' }} block rounded-control px-3 py-1.5 text-sm">{{ item.title }}</a>
+            </li>
+          @end
+        </ul>
+      @end
+    </nav>
+  </aside>
+</div>
+
+@!component('components/docs-search')

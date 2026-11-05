@@ -1,0 +1,185 @@
+{{-- Features tabs: ways to customize njin beyond the model (settings, helpers, events, MCP tools, plugins, tests). Snippets are pre-highlighted + entity-escaped so Edge does not parse them (see scratchpad gen_tabs.py). Token colors: .tk-* in app.css. --}}
+@let(points = [
+  'Settings your team can edit',
+  'Helpers and events in plain TypeScript',
+  'Plugins that bundle models, routes and admin pages',
+  'Custom tools your AI agents can call'
+])
+
+<section id="features" class="relative overflow-hidden border-b border-line">
+  <div class="relative mx-auto grid max-w-page gap-block overflow-hidden border-x border-line px-5 py-section sm:px-8 lg:grid-cols-5 lg:px-12">
+
+    <div class="min-w-0 lg:col-span-2">
+      <p class="mb-4"><span class="rounded-tag bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-eyebrow text-accent-fg">Features</span></p>
+      <h2 class="text-display-sm font-heading text-fg">Then make it<br />yours.</h2>
+      <p class="mt-5 max-w-md text-lg text-fg-muted">
+        The model is only the start. Settings, template helpers, events, MCP tools and plugins are plain TypeScript files you own, all registered in one config.ts. No framework source to fork.
+      </p>
+
+      <ul class="mt-6 space-y-3">
+        @each(point in points)
+          <li class="flex items-start gap-3 text-fg">
+            <span class="mt-0.5 text-primary">{{{ icon('check-circle-duotone', 'size-icon-md') }}}</span>
+            {{ point }}
+          </li>
+        @end
+      </ul>
+
+      <a href="/docs" class="mt-8 inline-flex items-center gap-2 rounded-control py-2 font-label text-fg underline decoration-line-strong decoration-2 underline-offset-8 hover:decoration-primary">
+        Read the docs {{{ icon('arrow-up-right-duotone', 'size-icon-sm') }}}
+      </a>
+    </div>
+
+    <div x-data="{ tab: 'settings' }" class="min-w-0 lg:col-span-3">
+      <div class="-mx-1 overflow-x-auto px-1 pb-2 pr-2">
+        <div role="tablist" class="tint inline-flex gap-1 rounded-full p-1">
+          <button type="button" role="tab" x-on:click="tab = 'settings'" :aria-selected="tab === 'settings'" :class="tab === 'settings' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-full px-4 py-1.5 text-sm font-label whitespace-nowrap">Settings</button>
+          <button type="button" role="tab" x-on:click="tab = 'helpers'" :aria-selected="tab === 'helpers'" :class="tab === 'helpers' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-full px-4 py-1.5 text-sm font-label whitespace-nowrap">Helpers</button>
+          <button type="button" role="tab" x-on:click="tab = 'events'" :aria-selected="tab === 'events'" :class="tab === 'events' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-full px-4 py-1.5 text-sm font-label whitespace-nowrap">Events</button>
+          <button type="button" role="tab" x-on:click="tab = 'mcp'" :aria-selected="tab === 'mcp'" :class="tab === 'mcp' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-full px-4 py-1.5 text-sm font-label whitespace-nowrap">MCP tools</button>
+          <button type="button" role="tab" x-on:click="tab = 'plugins'" :aria-selected="tab === 'plugins'" :class="tab === 'plugins' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-full px-4 py-1.5 text-sm font-label whitespace-nowrap">Plugins</button>
+          <button type="button" role="tab" x-on:click="tab = 'tests'" :aria-selected="tab === 'tests'" :class="tab === 'tests' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-full px-4 py-1.5 text-sm font-label whitespace-nowrap">Tests</button>
+        </div>
+      </div>
+
+      <div class="stage mt-4 rounded-panel p-3 sm:p-4">
+      <div class="theme-dark overflow-hidden rounded-card bg-neutral-900">
+        <div x-show="tab === 'settings'" >
+          <div class="tint flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-fg-muted">
+            <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+            src/vars/general.ts
+          </div>
+<pre class="min-h-96 overflow-x-auto p-5 font-mono text-sm leading-relaxed text-fg"><code><span class="tk-kw">export</span> <span class="tk-kw">default</span> <span class="tk-fn">makeVars</span>(<span class="tk-str">"general"</span>, &#123;
+  name: <span class="tk-str">"General"</span>,
+  schema: z.<span class="tk-fn">object</span>(&#123;
+    title: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Title"</span> }, (z) =&gt; z.<span class="tk-kw">default</span>(<span class="tk-str">"njin"</span>)),
+    banner: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Banner"</span> }, (z) =&gt; z.<span class="tk-kw">default</span>(<span class="tk-str">""</span>)),
+  }),
+});
+
+<span class="tk-cm">// in any template:</span>
+<span class="tk-cm">// &#64;let(site = await general.get())</span>
+<span class="tk-cm">// &lt;title&gt;&#123;&#123; site.title }}&lt;/title&gt;</span></code></pre>
+          <div class="tint px-4 py-3">
+            <p class="mb-2 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">What you get</p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs text-fg"><span class="rounded-tag bg-surface px-2 py-1">GET/PUT /api/vars/general</span><span class="rounded-tag bg-surface px-2 py-1">Settings form in admin</span><span class="rounded-tag bg-surface px-2 py-1">Defaults always complete</span><span class="rounded-tag bg-surface px-2 py-1">Drafts and languages optional</span></div>
+          </div>
+        </div>
+        <div x-show="tab === 'helpers'" x-cloak>
+          <div class="tint flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-fg-muted">
+            <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+            src/helpers/format_date.ts
+          </div>
+<pre class="min-h-96 overflow-x-auto p-5 font-mono text-sm leading-relaxed text-fg"><code><span class="tk-kw">import</span> &#123; defineHelper } <span class="tk-kw">from</span> <span class="tk-str">"&#64;njinlabs/njin"</span>;
+
+<span class="tk-kw">export</span> <span class="tk-kw">default</span> <span class="tk-fn">defineHelper</span>(<span class="tk-str">"formatDate"</span>, (date: string) =&gt; &#123;
+  <span class="tk-kw">return</span> new <span class="tk-fn">Date</span>(date).<span class="tk-fn">toLocaleDateString</span>(<span class="tk-str">"en-GB"</span>, &#123;
+    day: <span class="tk-str">"numeric"</span>,
+    month: <span class="tk-str">"short"</span>,
+    year: <span class="tk-str">"numeric"</span>,
+  });
+});
+
+<span class="tk-cm">// then, in any template:</span>
+<span class="tk-cm">// &#123;&#123; formatDate(post.createdAt) }}</span></code></pre>
+          <div class="tint px-4 py-3">
+            <p class="mb-2 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">What you get</p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs text-fg"><span class="rounded-tag bg-surface px-2 py-1">Global in every template</span><span class="rounded-tag bg-surface px-2 py-1">Sync or async</span><span class="rounded-tag bg-surface px-2 py-1">No endpoint, no database</span><span class="rounded-tag bg-surface px-2 py-1">Plain TypeScript</span></div>
+          </div>
+        </div>
+        <div x-show="tab === 'events'" x-cloak>
+          <div class="tint flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-fg-muted">
+            <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+            src/events/order_paid.ts
+          </div>
+<pre class="min-h-96 overflow-x-auto p-5 font-mono text-sm leading-relaxed text-fg"><code><span class="tk-cm">// src/events/order_paid.ts</span>
+<span class="tk-kw">const</span> orderPaid = makeEvent&lt;&#123; orderId: string }&gt;();
+
+<span class="tk-cm">// src/events/listeners/send_receipt.ts</span>
+orderPaid.<span class="tk-fn">listen</span>(<span class="tk-kw">async</span> (&#123; orderId }) =&gt; &#123;
+  <span class="tk-kw">await</span> <span class="tk-fn">sendReceipt</span>(orderId); <span class="tk-cm">// errors are logged, never thrown back</span>
+});
+
+<span class="tk-cm">// when an order is created</span>
+<span class="tk-fn">afterCreate</span>(order, (record) =&gt; &#123;
+  orderPaid.<span class="tk-fn">dispatch</span>(&#123; orderId: record.id });
+});</code></pre>
+          <div class="tint px-4 py-3">
+            <p class="mb-2 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">What you get</p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs text-fg"><span class="rounded-tag bg-surface px-2 py-1">Fire-and-forget fan-out</span><span class="rounded-tag bg-surface px-2 py-1">Listener errors are logged</span><span class="rounded-tag bg-surface px-2 py-1">Type-safe payloads</span><span class="rounded-tag bg-surface px-2 py-1">Pairs with model hooks</span></div>
+          </div>
+        </div>
+        <div x-show="tab === 'mcp'" x-cloak>
+          <div class="tint flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-fg-muted">
+            <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+            src/mcp/stale_drafts.ts
+          </div>
+<pre class="min-h-96 overflow-x-auto p-5 font-mono text-sm leading-relaxed text-fg"><code><span class="tk-kw">export</span> <span class="tk-kw">default</span> <span class="tk-fn">defineTool</span>(&#123;
+  name: <span class="tk-str">"stale_drafts"</span>,
+  description: <span class="tk-str">"List drafts not edited for N days."</span>,
+  input: &#123; days: z.<span class="tk-fn">number</span>().<span class="tk-fn">describe</span>(<span class="tk-str">"Minimum age in days"</span>) },
+  handler: <span class="tk-kw">async</span> (&#123; days }, &#123; can }) =&gt; &#123;
+    if (!<span class="tk-fn">can</span>(<span class="tk-str">"post"</span>, <span class="tk-str">"read"</span>)) throw new <span class="tk-fn">Error</span>(<span class="tk-str">"Not allowed"</span>);
+    <span class="tk-kw">const</span> &#123; data } = <span class="tk-kw">await</span> post.<span class="tk-fn">read</span>(&#123;
+      filters: &#123; status: <span class="tk-str">"draft"</span> },
+    });
+    <span class="tk-kw">const</span> cutoff = Date.<span class="tk-fn">now</span>() - days * 86_400_000;
+    <span class="tk-kw">return</span> data.<span class="tk-fn">filter</span>((p) =&gt; +new <span class="tk-fn">Date</span>(p.updatedAt) &lt; cutoff);
+  },
+});
+
+<span class="tk-cm">// config.ts</span>
+<span class="tk-cm">//   mcp: &#123; tools: [() =&gt; import("./src/mcp/stale_drafts")] }</span></code></pre>
+          <div class="tint px-4 py-3">
+            <p class="mb-2 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">What you get</p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs text-fg"><span class="rounded-tag bg-surface px-2 py-1">Offered next to the built-in tools</span><span class="rounded-tag bg-surface px-2 py-1">Arguments validated with Zod</span><span class="rounded-tag bg-surface px-2 py-1">can() checks who is calling</span><span class="rounded-tag bg-surface px-2 py-1">Errors go back to the agent</span></div>
+          </div>
+        </div>
+        <div x-show="tab === 'plugins'" x-cloak>
+          <div class="tint flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-fg-muted">
+            <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+            config.ts
+          </div>
+<pre class="min-h-96 overflow-x-auto p-5 font-mono text-sm leading-relaxed text-fg"><code><span class="tk-kw">import</span> &#123; defineConfig } <span class="tk-kw">from</span> <span class="tk-str">"&#64;njinlabs/njin/config"</span>;
+<span class="tk-kw">import</span> seo <span class="tk-kw">from</span> <span class="tk-str">"my-seo-plugin"</span>;
+
+<span class="tk-kw">export</span> <span class="tk-kw">default</span> <span class="tk-fn">defineConfig</span>(&#123;
+  plugins: [<span class="tk-fn">seo</span>(&#123; apiKey: process.env.SEO_KEY! })],
+});
+
+<span class="tk-cm">// A plugin can bundle models, vars, hooks, events,</span>
+<span class="tk-cm">// routes and its own admin pages. Or scaffold one</span>
+<span class="tk-cm">// inside your project:</span>
+<span class="tk-cm">//   bunx njin plugin:create analytics</span></code></pre>
+          <div class="tint px-4 py-3">
+            <p class="mb-2 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">What you get</p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs text-fg"><span class="rounded-tag bg-surface px-2 py-1">Models, vars, hooks, routes</span><span class="rounded-tag bg-surface px-2 py-1">Admin pages via the SDK</span><span class="rounded-tag bg-surface px-2 py-1">Its own permissions</span><span class="rounded-tag bg-surface px-2 py-1">From npm or src/plugins</span></div>
+          </div>
+        </div>
+        <div x-show="tab === 'tests'" x-cloak>
+          <div class="tint flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-fg-muted">
+            <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+            tests/post.test.ts
+          </div>
+<pre class="min-h-96 overflow-x-auto p-5 font-mono text-sm leading-relaxed text-fg"><code><span class="tk-kw">const</span> app = <span class="tk-kw">await</span> <span class="tk-fn">createTestApp</span>(config);
+
+<span class="tk-fn">it</span>(<span class="tk-str">"lets editors read posts"</span>, <span class="tk-kw">async</span> () =&gt; &#123;
+  <span class="tk-kw">const</span> g = <span class="tk-kw">await</span> app.<span class="tk-fn">createGroup</span>(&#123;
+    name: <span class="tk-str">"Editors"</span>,
+    grants: [<span class="tk-str">"post:*:own"</span>],
+  });
+  <span class="tk-kw">const</span> user = <span class="tk-kw">await</span> app.<span class="tk-fn">createUser</span>(&#123; groups: [g.id] });
+  <span class="tk-kw">const</span> res = <span class="tk-kw">await</span> app.<span class="tk-fn">get</span>(<span class="tk-str">"/api/post"</span>, &#123; as: user });
+  <span class="tk-fn">expect</span>(res.status).<span class="tk-fn">toBe</span>(<span class="tk-num">200</span>);
+});</code></pre>
+          <div class="tint px-4 py-3">
+            <p class="mb-2 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">What you get</p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs text-fg"><span class="rounded-tag bg-surface px-2 py-1">Your real app, in memory</span><span class="rounded-tag bg-surface px-2 py-1">No port opened</span><span class="rounded-tag bg-surface px-2 py-1">Permissions are testable</span><span class="rounded-tag bg-surface px-2 py-1">bun test --isolate</span></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,13 @@
+@component('layouts/main', { noindex: true, description: 'The server hit an unexpected error. Please try again in a moment.' })
+  @slot('title')
+    Something went wrong | njin
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: '' })
+    <main>
+      @!component('components/error-page', { code: 500, heading: 'Something went wrong.', text: 'The server hit an unexpected error. Please try again in a moment.' })
+    </main>
+    @!component('components/footer')
+  @end
+@end

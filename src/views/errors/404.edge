@@ -1,0 +1,13 @@
+@component('layouts/main', { noindex: true, description: 'The page you are looking for does not exist or has moved. Check the address, or head back to the docs.' })
+  @slot('title')
+    Page not found | njin
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: '' })
+    <main>
+      @!component('components/error-page', { code: 404, heading: 'Page not found.', text: 'The page you are looking for does not exist or has moved. Check the address, or head back to the docs.' })
+    </main>
+    @!component('components/footer')
+  @end
+@end

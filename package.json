@@ -1,0 +1,29 @@
+{
+  "name": "njin.run",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "njin dev",
+    "build": "njin build",
+    "start": "njin start",
+    "test": "bun test --isolate"
+  },
+  "dependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@iconify-json/ph": "^1.2.2",
+    "@iconify/utils": "^3.1.7",
+    "@njinlabs/njin": "^1.0.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "alpinejs": "^3.15.12",
+    "marked": "^18.1.3",
+    "minisearch": "^7.2.0",
+    "shiki": "^4.6.0",
+    "vite": "^8.0.14",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/alpinejs": "^3.13.11",
+    "typescript": "^5"
+  }
+}

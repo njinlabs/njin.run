@@ -1,0 +1,66 @@
+{{-- Docs search: a modal opened with Ctrl/Cmd+K or by the buttons that dispatch "docs-search-open". Logic: src/client/docs-search.ts --}}
+<div
+  class="contents"
+  x-data="docsSearch"
+  x-on:docs-search-open.window="show()"
+  x-on:keydown.window="onKey($event)"
+  x-effect="document.body.classList.toggle('overflow-hidden', open)"
+>
+  <div x-show="open" x-cloak class="fixed inset-0 z-50 flex items-start justify-center px-4 pt-[10vh]" role="dialog" aria-modal="true" aria-label="Search the documentation">
+    <div class="absolute inset-0 bg-overlay/60" x-on:click="close()"></div>
+
+    <div class="relative flex max-h-[75vh] w-full max-w-2xl flex-col overflow-hidden rounded-panel border border-line-strong bg-surface" x-on:keydown.escape.prevent="close()">
+      <div class="flex items-center gap-3 border-b border-line px-4">
+        <span class="text-fg-subtle">{{{ icon('magnifying-glass-duotone', 'size-icon-md') }}}</span>
+        <input
+          x-ref="input"
+          x-model="q"
+          x-on:input="run()"
+          x-on:keydown.arrow-down.prevent="move(1)"
+          x-on:keydown.arrow-up.prevent="move(-1)"
+          x-on:keydown.enter.prevent="go()"
+          type="search"
+          class="h-14 w-full bg-transparent text-base text-fg placeholder:text-fg-subtle focus:outline-none"
+          placeholder="Search the documentation"
+          aria-label="Search the documentation"
+          aria-controls="docs-search-results"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <kbd class="hidden shrink-0 rounded-tag border border-line px-1.5 py-0.5 font-mono text-xs text-fg-subtle sm:inline">Esc</kbd>
+      </div>
+
+      <div class="overflow-y-auto">
+        <p x-show="status === 'loading'" class="px-4 py-6 text-sm text-fg-muted">Loading…</p>
+        <p x-show="status === 'error'" class="px-4 py-6 text-sm text-danger">The search index could not be loaded. Try again later.</p>
+        <p x-show="status === 'ready' && !q.trim()" class="px-4 py-6 text-sm text-fg-muted">Type to search all the documentation.</p>
+        <p x-show="status === 'ready' && q.trim() && !results.length" class="px-4 py-6 text-sm text-fg-muted">No results for “<span x-text="q.trim()"></span>”.</p>
+
+        <ul id="docs-search-results" role="listbox" class="p-2" x-show="results.length">
+          <template x-for="(r, i) in results" :key="r.id">
+            <li role="option" :aria-selected="i === active">
+              <a
+                :id="'docs-search-result-' + i"
+                :href="r.url"
+                x-on:click="close()"
+                x-on:mousemove="active = i"
+                :class="i === active ? 'bg-primary-soft' : ''"
+                class="block rounded-control px-3 py-2.5"
+              >
+                <span class="block font-mono text-xs uppercase tracking-eyebrow text-fg-subtle" x-text="r.crumb"></span>
+                <span class="mt-0.5 block font-label text-fg" x-text="r.title"></span>
+                <span class="mt-0.5 block text-sm text-fg-muted" x-html="r.snippet"></span>
+              </a>
+            </li>
+          </template>
+        </ul>
+      </div>
+
+      <div class="hidden items-center gap-4 border-t border-line px-4 py-2 text-xs text-fg-subtle sm:flex">
+        <span><kbd class="font-mono">↑</kbd> <kbd class="font-mono">↓</kbd> to move</span>
+        <span><kbd class="font-mono">↵</kbd> to open</span>
+        <span class="ml-auto"><kbd class="font-mono" x-text="mac ? '⌘ K' : 'Ctrl K'"></kbd> to toggle</span>
+      </div>
+    </div>
+  </div>
+</div>

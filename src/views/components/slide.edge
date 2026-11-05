@@ -1,0 +1,19 @@
+{{-- 16:9 brand presentation slide. Props: eyebrow, title, no (page label) --}}
+<section class="mx-auto flex aspect-video w-full max-w-page flex-col overflow-hidden rounded-panel border border-line bg-surface p-12">
+  <header class="mb-6 flex items-end justify-between gap-6">
+    <div>
+      <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">{{ eyebrow }}</p>
+      <h2 class="mt-2 text-4xl font-extrabold text-fg">{{ title }}</h2>
+    </div>
+    <img src="{{ vite.static('logo.svg') }}" alt="njin" class="h-6 w-auto" />
+  </header>
+
+  <div class="min-h-0 flex-1">
+    {{{ await $slots.main() }}}
+  </div>
+
+  <footer class="mt-6 flex items-center justify-between border-t border-line pt-4 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">
+    <span>njin · brand tokens v0.1</span>
+    <span>{{ no }}</span>
+  </footer>
+</section>

@@ -1,0 +1,49 @@
+{{-- Site footer: brand + two link columns, then a small legal row. --}}
+@let(product = [
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'AI agents', href: '/#agents' },
+  { label: 'Features', href: '/#features' }
+])
+@let(resources = [
+  { label: 'Documentation', href: '/docs' },
+  { label: 'GitHub', href: 'https://github.com/njinlabs/njin' },
+  { label: 'npm package', href: 'https://www.npmjs.com/package/@njinlabs/njin' }
+])
+
+<footer class="border-t border-line">
+  <div class="mx-auto max-w-page border-x border-line">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+      <div class="border-b border-line p-5 sm:p-8 sm:col-span-2 lg:border-b-0 lg:border-r lg:p-10">
+        <a href="/" aria-label="njin home"><img src="{{ vite.static('logo.svg') }}" alt="njin" class="h-7 w-auto" /></a>
+        <p class="mt-4 max-w-xs text-sm text-fg-muted">
+          One model in, an API, an admin panel and a website out. Built for people and AI agents.
+        </p>
+      </div>
+
+      <nav class="border-b border-line p-5 sm:p-8 sm:border-r lg:border-b-0 lg:p-10" aria-label="Product">
+        <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">Product</p>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          @each(l in product)
+            <li><a href="{{ l.href }}" class="text-fg-muted hover:text-fg">{{ l.label }}</a></li>
+          @end
+        </ul>
+      </nav>
+
+      <nav class="p-5 sm:p-8 lg:p-10" aria-label="Resources">
+        <p class="font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">Resources</p>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          @each(l in resources)
+            <li><a href="{{ l.href }}" class="text-fg-muted hover:text-fg">{{ l.label }}</a></li>
+          @end
+        </ul>
+      </nav>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 sm:px-8 py-5 font-mono text-xs text-fg-subtle lg:px-10">
+      <p>© {{ new Date().getFullYear() }} njin</p>
+      <p>Open source, MIT license</p>
+    </div>
+
+  </div>
+</footer>

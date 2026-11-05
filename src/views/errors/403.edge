@@ -1,0 +1,13 @@
+@component('layouts/main', { noindex: true, description: 'You do not have access to this page.' })
+  @slot('title')
+    Forbidden | njin
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: '' })
+    <main>
+      @!component('components/error-page', { code: 403, heading: 'You can't open this.', text: 'You do not have access to this page.' })
+    </main>
+    @!component('components/footer')
+  @end
+@end

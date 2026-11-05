@@ -1,0 +1,114 @@
+{{-- AI agents: two hairline cells, each with a layered illustration. No borders inside the illustrations: depth comes from tone (.stage / .tone / .tint in app.css). Convention = stacked file cards (fan out on hover). Deterministic = admin form overlapped by an API window, one field highlighted in all three places. --}}
+@let(cards = [
+  { file: 'config.ts', role: 'config', left: 130, top: 0, tint: 'text-fg-subtle', dot: 'bg-fg-subtle', t: 55 },
+  { file: 'src/models/product.ts', role: 'model', left: 96, top: 56, tint: 'text-fg-subtle', dot: 'bg-primary', t: 70 },
+  { file: 'src/vars/general.ts', role: 'settings', left: 62, top: 112, tint: 'text-fg-subtle', dot: 'bg-info', t: 85 },
+  { file: 'src/views/pages/pricing.edge', role: 'page', left: 28, top: 168, tint: 'text-primary', dot: 'bg-accent', t: 100 }
+])
+
+<section id="agents" class="border-b border-line">
+  <div class="mx-auto max-w-page border-x border-line">
+
+    <div class="px-5 sm:px-8 py-section text-center lg:px-12">
+      <p class="mb-4"><span class="rounded-tag bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-eyebrow text-accent-fg">AI agents</span></p>
+      <h2 class="text-display-sm font-heading text-fg">Predictable by design.<br />Easy for agents.</h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-fg-muted">
+        Agents do their best work where there is one obvious way to do things. njin removes the guesswork, so what they build is what you meant.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2">
+
+      {{-- Convention --}}
+      <div class="group flex min-w-0 flex-col overflow-hidden border-t border-line p-5 sm:p-8 sm:border-r lg:p-10">
+        <h3 class="text-xl font-title text-fg">Convention</h3>
+        <p class="mt-2 max-w-sm text-fg-muted">Every kind of change has one home, so an agent always knows which file to touch.</p>
+
+        <div class="mt-auto pt-8">
+          <div class="stage relative -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 h-80 overflow-hidden lg:-mx-10 lg:-mb-10" aria-hidden="true">
+            <div class="cell-grid absolute inset-0"></div>
+            @each((c, i) in cards)
+              <div class="stack-card tone absolute h-64 w-110 overflow-hidden rounded-t-card" style="left: {{ c.left }}px; top: {{ c.top }}px; z-index: {{ i + 1 }}; --n: {{ 3 - i }}; --t: {{ c.t }}">
+                <div class="tint flex items-center gap-2.5 px-4 py-3.5">
+                  <span class="{{ c.tint }} shrink-0">{{{ icon('file-code-duotone', 'size-icon-lg') }}}</span>
+                  <span class="truncate text-base font-label text-fg">{{ c.file }}</span>
+                  <span class="tint flex shrink-0 items-center gap-1.5 rounded-tag px-1.5 py-0.5 font-mono text-xs text-fg-muted"><span class="{{ c.dot }} size-1.5 rounded-full"></span>{{ c.role }}</span>
+                </div>
+                <div class="space-y-2.5 p-4">
+                  <div class="tint-strong h-2.5 w-2/3 rounded-full"></div>
+                  <div class="h-2.5 w-1/2 rounded-full bg-primary-soft"></div>
+                  <div class="tint-strong h-2.5 w-3/5 rounded-full"></div>
+                  <div class="tint-strong h-2.5 w-2/5 rounded-full"></div>
+                </div>
+              </div>
+            @end
+          </div>
+        </div>
+      </div>
+
+      {{-- Deterministic --}}
+      <div class="flex min-w-0 flex-col overflow-hidden border-t border-line p-5 sm:p-8 lg:p-10">
+        <h3 class="text-xl font-title text-fg">Deterministic</h3>
+        <p class="mt-2 max-w-sm text-fg-muted">One definition feeds the API, the admin and the schema, so they cannot drift apart. Same field, same shape, everywhere.</p>
+
+        <div class="mt-auto pt-8">
+          <div class="stage relative -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 h-80 overflow-hidden lg:-mx-10 lg:-mb-10" aria-hidden="true">
+            <div class="cell-grid absolute inset-0"></div>
+
+            {{-- admin form (back) --}}
+            <div class="tone absolute left-7 top-7 h-80 w-72 overflow-hidden rounded-card" style="--t: 100">
+              <div class="tint flex items-center justify-between px-4 py-3">
+                <span class="text-sm font-title text-fg">Edit product</span>
+                <span class="rounded-tag bg-warning-soft px-1.5 py-0.5 font-mono text-xs text-warning-soft-fg">draft</span>
+              </div>
+              <div class="space-y-3 p-4">
+                <div>
+                  <p class="mb-1 text-xs font-label text-fg-muted">Title</p>
+                  <div class="rounded-control bg-surface px-3 py-2 text-sm text-fg">Linen tee</div>
+                </div>
+                <div>
+                  <p class="mb-1 text-xs font-label text-fg">Price</p>
+                  <div class="flex items-center justify-between rounded-control bg-brand-100 px-3 py-2 text-sm text-fg dark:bg-brand-900">
+                    120
+                    <span class="font-mono text-xs text-primary-soft-fg">numeric</span>
+                  </div>
+                </div>
+                <div>
+                  <p class="mb-1 text-xs font-label text-fg-muted">Cover</p>
+                  <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2.5 text-sm text-fg-subtle">
+                    {{{ icon('image-duotone', 'size-icon-md') }}} Drop a file
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{-- schema chip (floating) --}}
+            <div class="absolute right-6 top-5 z-20 hidden items-center gap-2 rounded-control bg-brand-100 px-3 py-1.5 font-mono text-xs text-brand-800 sm:flex dark:bg-brand-900 dark:text-brand-100">
+              <span class="size-2 rounded-full bg-primary"></span>
+              schema · price: number
+            </div>
+
+            {{-- API window (front, bleeds off the edge) --}}
+            <div class="absolute left-44 top-28 z-10 h-64 w-110 overflow-hidden rounded-card bg-neutral-800 dark:bg-neutral-950">
+              <div class="flex items-center gap-2 bg-white/5 px-4 py-3">
+                <span class="size-2.5 rounded-full bg-white/15"></span>
+                <span class="size-2.5 rounded-full bg-white/15"></span>
+                <span class="size-2.5 rounded-full bg-white/15"></span>
+                <span class="ml-3 font-mono text-xs text-neutral-400">GET /api/product/1</span>
+              </div>
+              <div class="py-3 font-mono text-xs leading-relaxed">
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">1</span><span class="text-neutral-200">{</span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">2</span><span class="pl-4 text-neutral-400">"id"<span class="text-neutral-200">: </span><span class="text-brand-200">"8x2k"</span><span class="text-neutral-200">,</span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">3</span><span class="pl-4 text-neutral-400">"title"<span class="text-neutral-200">: </span><span class="text-brand-200">"Linen tee"</span><span class="text-neutral-200">,</span></span></p>
+                <p class="flex bg-brand-400/15"><span class="w-9 shrink-0 pr-3 text-right text-brand-300">4</span><span class="pl-4 text-neutral-400">"price"<span class="text-neutral-200">: </span><span class="text-brand-200">120</span><span class="text-neutral-200">,</span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">5</span><span class="pl-4 text-neutral-400">"status"<span class="text-neutral-200">: </span><span class="text-brand-200">"draft"</span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">6</span><span class="text-neutral-200">}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

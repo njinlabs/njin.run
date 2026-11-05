@@ -1,0 +1,27 @@
+@let(tree = await docsNav())
+
+@component('layouts/main', { path: '/docs', description: 'The njin documentation: models, pages, the REST API, access control and AI agents.' })
+  @slot('title')
+    Documentation | njin
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: '/docs' })
+    <div class="mx-auto max-w-page border-x border-line lg:grid lg:grid-cols-[16rem_1fr]">
+      @!component('components/docs-sidebar', { tree: tree })
+      <main class="min-w-0 px-5 py-block sm:px-8 lg:px-12">
+        <h1 class="text-display-sm font-heading text-fg">Documentation</h1>
+        <p class="mt-4 max-w-xl text-lg text-fg-muted">Everything you need to build with njin: models, pages, the REST API and AI agents.</p>
+        <div class="mt-block grid gap-4 sm:grid-cols-2">
+          @each(section in tree)
+            <a href="{{ section.pages[0].href }}" class="rounded-card border border-line p-5 hover:border-line-strong">
+              <h2 class="font-title text-fg">{{ section.title }}</h2>
+              <p class="mt-1 text-sm text-fg-muted">{{ section.pages.map((p) => p.title).slice(0, 4).join(' · ') }}</p>
+            </a>
+          @end
+        </div>
+      </main>
+    </div>
+    @!component('components/footer')
+  @end
+@end

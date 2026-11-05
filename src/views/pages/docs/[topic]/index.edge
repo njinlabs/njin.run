@@ -1,0 +1,27 @@
+@let(tree = await docsNav())
+@let(section = tree.find((s) => s.slug === params.topic))
+@if(!section)
+  {{ abort(404) }}
+@end
+
+@component('layouts/main', { path: '/docs/' + section.slug, description: section.title + ' in the njin documentation: ' + section.pages.map((p) => p.title).join(', ') + '.' })
+  @slot('title')
+    {{ section.title }} | njin docs
+  @end
+
+  @slot('main')
+    @!component('components/header', { path: '/docs' })
+    <div class="mx-auto max-w-page border-x border-line lg:grid lg:grid-cols-[16rem_1fr]">
+      @!component('components/docs-sidebar', { tree: tree })
+      <main class="min-w-0 px-5 py-block sm:px-8 lg:px-12">
+        <h1 class="text-display-sm font-heading text-fg">{{ section.title }}</h1>
+        <ul class="mt-block divide-y divide-line border-y border-line">
+          @each(item in section.pages)
+            <li><a href="{{ item.href }}" class="block py-3 text-fg-muted hover:text-fg">{{ item.title }}</a></li>
+          @end
+        </ul>
+      </main>
+    </div>
+    @!component('components/footer')
+  @end
+@end

@@ -1,0 +1,16 @@
+{{-- Shared body for errors/*.edge. Props: code, heading, text. --}}
+<section class="border-b border-line">
+  <div class="mx-auto flex min-h-[60vh] max-w-page flex-col items-center justify-center border-x border-line px-5 py-section text-center sm:px-8 lg:px-12">
+    <p class="mb-4"><span class="rounded-tag bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-eyebrow text-accent-fg">Error {{ code }}</span></p>
+    <h1 class="text-display-md font-heading text-fg">{{ heading }}</h1>
+    <p class="mt-5 max-w-md text-lg text-fg-muted">{{ text }}</p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href="/" class="inline-flex items-center gap-2 rounded-control border-2 border-ink bg-primary px-5 py-2.5 font-label text-primary-fg shadow-pop hover:bg-primary-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
+        Back to home {{{ icon('arrow-right-duotone', 'size-icon-md') }}}
+      </a>
+      <a href="/docs" class="inline-flex items-center gap-2 rounded-control px-3 py-2.5 font-label text-fg underline decoration-line-strong decoration-2 underline-offset-8 hover:decoration-primary">
+        Read the docs
+      </a>
+    </div>
+  </div>
+</section>
