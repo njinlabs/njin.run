@@ -1,19 +1,9 @@
-import bunFilesystemAdapter from "@njinlabs/njin/adapters/bun_filesystem";
+import postgresAdapter from "@njinlabs/njin/adapters/postgres";
+import s3Adapter from "@njinlabs/njin/adapters/s3";
 import { defineConfig } from "@njinlabs/njin/config";
 
 export default defineConfig({
   port: Number(process.env.PORT ?? 3000),
-  db: {
-    path: process.env.DB_PATH ?? "rocksdb://data",
-    namespace: process.env.DB_NAMESPACE ?? "general",
-    database: process.env.DB_DATABASE ?? "general",
-    // Only needed for a remote db.path (ws://, wss://, http://, https://), root/system auth or a token:
-    // auth: process.env.DB_TOKEN
-    //   ? process.env.DB_TOKEN
-    //   : process.env.DB_USERNAME && process.env.DB_PASSWORD
-    //     ? { username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD }
-    //     : undefined,
-  },
   img: {
     hosts: process.env.IMG_HOSTS
       ? process.env.IMG_HOSTS.split(",")
@@ -22,7 +12,15 @@ export default defineConfig({
       : [],
   },
   adapters: {
-    file: bunFilesystemAdapter({ dir: "./uploads" }),
+    db: postgresAdapter({ url: process.env.DATABASE_URL! }),
+    file: s3Adapter({
+      bucket: process.env.S3_BUCKET!,
+      region: process.env.S3_REGION,
+      endpoint: process.env.S3_ENDPOINT,
+      accessKeyId: process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+      publicUrl: process.env.S3_PUBLIC_URL,
+    }),
   },
   models: [
     // Register your models here, e.g.:
