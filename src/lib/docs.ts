@@ -9,10 +9,12 @@ import { createHighlighter } from "shiki";
 // not the project directory. The cwd-based paths remain as fallbacks (e.g. a compiled build, where it is ./views).
 const ROOT =
   [
-    join(import.meta.dir, "..", "views", "docs-content"),
+    join(import.meta.dir, "..", "views", "docs-content"), // running from source: src/lib/docs.ts
+    join(import.meta.dir, "src", "views", "docs-content"), // bundled into a worker at the project root
+    join(import.meta.dir, "views", "docs-content"), // bundled into out/
     join(process.cwd(), "src", "views", "docs-content"),
     join(process.cwd(), "views", "docs-content"),
-  ].find((p) => existsSync(p)) ?? join(import.meta.dir, "..", "views", "docs-content");
+  ].find((p) => existsSync(p)) ?? join(process.cwd(), "src", "views", "docs-content");
 const isProd = process.env.NODE_ENV === "production";
 
 const SECTION_TITLES: Record<string, string> = {
