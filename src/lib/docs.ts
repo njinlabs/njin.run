@@ -1,10 +1,18 @@
+import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { Marked } from "marked";
 import { createHighlighter } from "shiki";
 
 // Kept under src/views because `njin build` copies that folder (and not src/docs) next to the server.
-const ROOT = join(process.cwd(), "src", "views", "docs-content");
+// Resolved relative to this file first, not process.cwd(): when the app is run by a supervisor the cwd is
+// not the project directory. The cwd-based paths remain as fallbacks (e.g. a compiled build, where it is ./views).
+const ROOT =
+  [
+    join(import.meta.dir, "..", "views", "docs-content"),
+    join(process.cwd(), "src", "views", "docs-content"),
+    join(process.cwd(), "views", "docs-content"),
+  ].find((p) => existsSync(p)) ?? join(import.meta.dir, "..", "views", "docs-content");
 const isProd = process.env.NODE_ENV === "production";
 
 const SECTION_TITLES: Record<string, string> = {
