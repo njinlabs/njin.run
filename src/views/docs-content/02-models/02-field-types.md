@@ -97,3 +97,7 @@ The first argument of every helper accepts these options:
 | Several uploaded files | `multiFile` |
 
 Every field is required unless you make it optional. See [Validation](/docs/models/validation).
+
+## Custom inputs
+
+Any field can be drawn with an input from an admin plugin by wrapping it with `plugin()`, without changing how it is validated or stored. See [Custom field inputs](/docs/extending/plugins#custom-field-inputs).
