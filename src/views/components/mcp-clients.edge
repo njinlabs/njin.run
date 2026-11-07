@@ -1,0 +1,25 @@
+{{-- "Connect over MCP" strip: the MCP clients named in docs/ai-agents/mcp. Logos come from the icon() helper (Iconify, one color). --}}
+@let(clients = [
+  { name: 'Claude', logo: 'simple-icons:claude' },
+  { name: 'ChatGPT', logo: 'logos:openai-icon' },
+  { name: 'Cursor', logo: 'simple-icons:cursor' }
+])
+
+<div class="flex flex-col items-start gap-5 border-t border-line px-5 py-6 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12">
+  <p class="flex items-center gap-2.5 font-mono text-xs uppercase tracking-eyebrow text-fg-subtle">
+    {{{ icon('simple-icons:modelcontextprotocol', 'size-5 text-fg-muted') }}} Connect over MCP
+  </p>
+
+  <ul class="flex flex-wrap items-center gap-x-8 gap-y-3 text-fg-muted">
+    @each(c in clients)
+      <li class="flex items-center gap-2.5">
+        {{{ icon(c.logo, 'size-5') }}}
+        <span class="text-base font-label">{{ c.name }}</span>
+      </li>
+    @end
+  </ul>
+
+  <a href="/docs/ai-agents/mcp" class="inline-flex items-center gap-2 font-label text-sm text-fg underline decoration-line-strong decoration-2 underline-offset-8 hover:decoration-primary">
+    How to connect {{{ icon('arrow-right-duotone', 'size-icon-md') }}}
+  </a>
+</div>

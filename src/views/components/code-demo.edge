@@ -14,27 +14,37 @@
       </a>
     </div>
 
-    <div x-data="{ tab: 'api', lit: { api: [1, 5, 7, 8, 11], admin: [3, 4, 7, 8, 9, 10, 11], site: [3, 4, 9, 10], agents: [4, 7, 9] } }" class="stage mt-block flex flex-col items-stretch gap-4 rounded-panel p-2 sm:p-6 lg:flex-row">
+    <div x-data="{ tab: 'api', lit: { api: [3, 4, 5, 7, 8, 15], admin: [4, 5, 7, 8, 9, 10, 11, 12, 15, 16], site: [4, 5, 8, 10, 11, 15], agents: [2, 5, 8] } }" class="stage mt-block flex flex-col items-stretch gap-4 rounded-panel p-2 sm:p-6 lg:flex-row">
 
       <div class="theme-dark flex min-w-0 flex-col overflow-hidden rounded-card bg-neutral-900 lg:flex-1">
         <div class="tint flex items-center justify-between px-4 py-3 font-mono text-xs text-fg-muted">
           <span>Model</span>
-          <span class="text-fg-subtle">src/models/post.ts</span>
+          <span class="text-fg-subtle">src/models/article.ts</span>
         </div>
         <div class="h-104 overflow-auto py-4 font-mono text-[13px] leading-relaxed text-fg">
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(1) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">1</span><span class="whitespace-pre"><span class="tk-kw">export</span> <span class="tk-kw">default</span> <span class="tk-fn">makeModel</span>(<span class="tk-str">"post"</span>, &#123;</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(2) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">2</span><span class="whitespace-pre">  name: <span class="tk-str">"Post"</span>,</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(3) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">3</span><span class="whitespace-pre">  draftable: <span class="tk-kw">true</span>,</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(4) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">4</span><span class="whitespace-pre">  i18n: <span class="tk-kw">true</span>,</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(5) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">5</span><span class="whitespace-pre">  searchFields: [<span class="tk-str">"title"</span>, <span class="tk-str">"author.name"</span>],</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(1) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">1</span><span class="whitespace-pre"><span class="tk-kw">const</span> article = <span class="tk-fn">makeModel</span>(<span class="tk-str">"article"</span>, &#123;</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(2) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">2</span><span class="whitespace-pre">  name: <span class="tk-str">"Article"</span>,</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(3) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">3</span><span class="whitespace-pre">  searchFields: [<span class="tk-str">"title"</span>, <span class="tk-str">"author.name"</span>],</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(4) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">4</span><span class="whitespace-pre">  draftable: <span class="tk-kw">true</span>,</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(5) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">5</span><span class="whitespace-pre">  i18n: <span class="tk-kw">true</span>,</span></div>
 <div class="flex transition-opacity duration-300" :class="lit[tab].includes(6) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">6</span><span class="whitespace-pre">  schema: z.<span class="tk-fn">object</span>(&#123;</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(7) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">7</span><span class="whitespace-pre">    title: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Title"</span>, localized: <span class="tk-kw">true</span> }),</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(8) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">8</span><span class="whitespace-pre">    slug: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Slug"</span>, unique: <span class="tk-kw">true</span> }),</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(9) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">9</span><span class="whitespace-pre">    body: <span class="tk-fn">richtext</span>(&#123; label: <span class="tk-str">"Body"</span>, localized: <span class="tk-kw">true</span> }),</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(10) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">10</span><span class="whitespace-pre">    cover: <span class="tk-fn">file</span>(&#123; label: <span class="tk-str">"Cover"</span> }),</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(11) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">11</span><span class="whitespace-pre">    author: <span class="tk-fn">relation</span>(&#123; label: <span class="tk-str">"Author"</span> }, author),</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(12) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">12</span><span class="whitespace-pre">  }),</span></div>
-<div class="flex transition-opacity duration-300" :class="lit[tab].includes(13) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">13</span><span class="whitespace-pre">});</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(7) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">7</span><span class="whitespace-pre">    slug: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Slug"</span>, unique: <span class="tk-kw">true</span> }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(8) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">8</span><span class="whitespace-pre">    title: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Title"</span>, localized: <span class="tk-kw">true</span> }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(9) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">9</span><span class="whitespace-pre">    excerpt: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Excerpt"</span>, localized: <span class="tk-kw">true</span> }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(10) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">10</span><span class="whitespace-pre">    body: <span class="tk-fn">richtext</span>(&#123; label: <span class="tk-str">"Body"</span>, localized: <span class="tk-kw">true</span> }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(11) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">11</span><span class="whitespace-pre">    cover: <span class="tk-fn">file</span>(&#123; label: <span class="tk-str">"Cover"</span> }, (z) =&gt; z.<span class="tk-fn">optional</span>()),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(12) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">12</span><span class="whitespace-pre">    category: <span class="tk-fn">select</span>(&#123; label: <span class="tk-str">"Category"</span> }, [<span class="tk-str">"NEWS"</span>, <span class="tk-str">"TUTORIAL"</span>, <span class="tk-str">"RELEASE"</span>]),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(13) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">13</span><span class="whitespace-pre">    isFeatured: <span class="tk-fn">boolean</span>(&#123; label: <span class="tk-str">"Featured?"</span> }, (z) =&gt; z.<span class="tk-fn">default</span>(<span class="tk-kw">false</span>)),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(14) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">14</span><span class="whitespace-pre">    publishDate: <span class="tk-fn">date</span>(&#123; label: <span class="tk-str">"Publish date"</span> }, (z) =&gt; z.<span class="tk-fn">optional</span>()),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(15) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">15</span><span class="whitespace-pre">    author: <span class="tk-fn">relation</span>(&#123; label: <span class="tk-str">"Author"</span>, labelKey: <span class="tk-str">"name"</span> }, author),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(16) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">16</span><span class="whitespace-pre">    tags: <span class="tk-fn">relationMany</span>(&#123; label: <span class="tk-str">"Tags"</span>, labelKey: <span class="tk-str">"label"</span> }, tag),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(17) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">17</span><span class="whitespace-pre">    keywords: <span class="tk-fn">array</span>(&#123; label: <span class="tk-str">"Keywords"</span> }, <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Keyword"</span> })),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(18) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">18</span><span class="whitespace-pre">    seo: <span class="tk-fn">object</span>(&#123; label: <span class="tk-str">"SEO"</span> }, &#123;</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(19) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">19</span><span class="whitespace-pre">      metaTitle: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Meta title"</span> }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(20) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">20</span><span class="whitespace-pre">      metaDescription: <span class="tk-fn">text</span>(&#123; label: <span class="tk-str">"Meta description"</span> }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(21) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">21</span><span class="whitespace-pre">    }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(22) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">22</span><span class="whitespace-pre">  }),</span></div>
+<div class="flex transition-opacity duration-300" :class="lit[tab].includes(23) ? '' : 'opacity-30'"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">23</span><span class="whitespace-pre">});</span></div>
         </div>
         <p class="tint px-4 py-2.5 text-xs text-fg-muted">Bright lines are what the selected output is built from.</p>
       </div>
@@ -53,85 +63,66 @@
         </div>
         <div class="h-104 overflow-auto">
           <div x-show="tab === 'api'" class="py-4 font-mono text-[13px] leading-relaxed text-fg">
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">1</span><span class="whitespace-pre"><span class="tk-kw">GET</span> /api/post?locale=en&amp;search=about</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">1</span><span class="whitespace-pre"><span class="tk-kw">GET</span> /api/article?locale=en&amp;search=drafts&amp;select=title,slug,author.name</span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">2</span><span class="whitespace-pre"> </span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">3</span><span class="whitespace-pre"><span class="tk-num">200</span> OK</span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">4</span><span class="whitespace-pre">&#123;</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">5</span><span class="whitespace-pre">  <span class="tk-fn">"data"</span>: [&#123;</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">6</span><span class="whitespace-pre">    <span class="tk-fn">"id"</span>: <span class="tk-str">"8x2k"</span>,</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">7</span><span class="whitespace-pre">    <span class="tk-fn">"title"</span>: <span class="tk-str">"About"</span>,</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">8</span><span class="whitespace-pre">    <span class="tk-fn">"slug"</span>: <span class="tk-str">"about"</span>,</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">9</span><span class="whitespace-pre">    <span class="tk-fn">"author"</span>: &#123; <span class="tk-fn">"id"</span>: <span class="tk-str">"1"</span>, <span class="tk-fn">"name"</span>: <span class="tk-str">"Ayu"</span> }</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">10</span><span class="whitespace-pre">  }],</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">11</span><span class="whitespace-pre">  <span class="tk-fn">"meta"</span>: &#123; <span class="tk-fn">"total"</span>: <span class="tk-num">1</span>, <span class="tk-fn">"page"</span>: <span class="tk-num">1</span> }</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">12</span><span class="whitespace-pre">}</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">13</span><span class="whitespace-pre"> </span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">14</span><span class="whitespace-pre"><span class="tk-cm">// same slug again</span></span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">15</span><span class="whitespace-pre"><span class="tk-kw">POST</span> /api/post  -&gt;  <span class="tk-num">409</span> &#123; <span class="tk-fn">"field"</span>: <span class="tk-str">"slug"</span> }</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">5</span><span class="whitespace-pre">  <span class="tk-fn">"data"</span>: [</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">6</span><span class="whitespace-pre">    &#123;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">7</span><span class="whitespace-pre">      <span class="tk-fn">"author"</span>: &#123;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">8</span><span class="whitespace-pre">        <span class="tk-fn">"id"</span>: <span class="tk-str">"ebuuejjpnchu3eaz7lq3"</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">9</span><span class="whitespace-pre">        <span class="tk-fn">"name"</span>: <span class="tk-str">"Dimas Pratama"</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">10</span><span class="whitespace-pre">      },</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">11</span><span class="whitespace-pre">      <span class="tk-fn">"locale"</span>: <span class="tk-str">"en"</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">12</span><span class="whitespace-pre">      <span class="tk-fn">"slug"</span>: <span class="tk-str">"introducing-drafts"</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">13</span><span class="whitespace-pre">      <span class="tk-fn">"title"</span>: <span class="tk-str">"Introducing drafts (updated)"</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">14</span><span class="whitespace-pre">      <span class="tk-fn">"id"</span>: <span class="tk-str">"1n1qci8qksoedxu98vv5"</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">15</span><span class="whitespace-pre">    }</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">16</span><span class="whitespace-pre">  ],</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">17</span><span class="whitespace-pre">  <span class="tk-fn">"meta"</span>: &#123;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">18</span><span class="whitespace-pre">    <span class="tk-fn">"total"</span>: <span class="tk-num">1</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">19</span><span class="whitespace-pre">    <span class="tk-fn">"page"</span>: <span class="tk-num">1</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">20</span><span class="whitespace-pre">    <span class="tk-fn">"limit"</span>: <span class="tk-num">20</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">21</span><span class="whitespace-pre">    <span class="tk-fn">"pageCount"</span>: <span class="tk-num">1</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">22</span><span class="whitespace-pre">  }</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">23</span><span class="whitespace-pre">}</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">24</span><span class="whitespace-pre"> </span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">25</span><span class="whitespace-pre"><span class="tk-cm">// same slug again</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">26</span><span class="whitespace-pre"><span class="tk-kw">POST</span> /api/article  -&gt;  <span class="tk-num">409</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">27</span><span class="whitespace-pre">&#123;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">28</span><span class="whitespace-pre">  <span class="tk-fn">"message"</span>: <span class="tk-str">"Field \"slug\" must be unique — value already exists"</span>,</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">29</span><span class="whitespace-pre">  <span class="tk-fn">"field"</span>: <span class="tk-str">"slug"</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">30</span><span class="whitespace-pre">}</span></div>
           </div>
-          <div x-show="tab === 'admin'" x-cloak class="space-y-3 p-4">
-            <div class="flex items-center justify-between">
-              <p class="text-sm font-title text-fg">Edit post</p>
-              <div class="flex items-center gap-2">
-                <span class="rounded-tag bg-warning-soft px-2 py-0.5 font-mono text-xs text-warning-soft-fg">draft</span>
-                <span class="rounded-control bg-primary px-3 py-1 text-xs font-label text-primary-fg">Publish</span>
-              </div>
-            </div>
-            <div class="flex gap-1 font-mono text-xs">
-              <span class="rounded-tag bg-surface-muted px-2 py-1 text-fg-muted">ID</span>
-              <span class="rounded-tag bg-surface px-2 py-1 text-fg">EN</span>
-            </div>
-            <div>
-              <p class="mb-1 text-xs font-label text-fg-muted">Title</p>
-              <div class="rounded-control bg-surface px-3 py-2 text-sm text-fg">About</div>
-            </div>
-            <div>
-              <p class="mb-1 text-xs font-label text-fg-muted">Slug</p>
-              <div class="flex items-center justify-between rounded-control bg-surface px-3 py-2 text-sm text-fg">about <span class="font-mono text-xs text-fg-subtle">unique</span></div>
-            </div>
-            <div>
-              <p class="mb-1 text-xs font-label text-fg-muted">Body</p>
-              <div class="rounded-control bg-surface">
-                <div class="tint flex gap-3 px-3 py-1.5 text-fg-muted">{{{ icon('text-b-duotone', 'size-icon-sm') }}} {{{ icon('text-italic-duotone', 'size-icon-sm') }}} {{{ icon('list-bullets-duotone', 'size-icon-sm') }}} {{{ icon('link-duotone', 'size-icon-sm') }}}</div>
-                <p class="px-3 py-2 text-sm text-fg">We build calm software for small teams.</p>
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <p class="mb-1 text-xs font-label text-fg-muted">Cover</p>
-                <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2 text-sm text-fg-muted">{{{ icon('image-duotone', 'size-icon-md') }}} Drop a file</div>
-              </div>
-              <div>
-                <p class="mb-1 text-xs font-label text-fg-muted">Author</p>
-                <div class="flex items-center justify-between rounded-control bg-surface px-3 py-2 text-sm text-fg">Ayu {{{ icon('caret-down-duotone', 'size-icon-sm') }}}</div>
-              </div>
-            </div>
+          <div x-show="tab === 'admin'" x-cloak class="h-full overflow-hidden">
+            @!component('components/shot', { name: 'article-edit-mobile', alt: 'The Article edit form in the njin admin panel.', w: 1000, dark: true, cls: 'w-full' })
           </div>
           <div x-show="tab === 'site'" x-cloak class="py-4 font-mono text-[13px] leading-relaxed text-fg">
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">1</span><span class="whitespace-pre"><span class="tk-kw">&#64;let</span>(item = await post.published.show(params.id, &#123; locale: <span class="tk-str">'en'</span> }))</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">1</span><span class="whitespace-pre"><span class="tk-kw">&#64;let</span>(item = await article.published.show(params.id, &#123; locale: <span class="tk-str">'en'</span> }))</span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">2</span><span class="whitespace-pre"><span class="tk-kw">&#64;if</span>(!item)</span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">3</span><span class="whitespace-pre">  <span class="tk-mu">&#123;&#123; abort(404) }}</span></span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">4</span><span class="whitespace-pre"><span class="tk-kw">&#64;end</span></span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">5</span><span class="whitespace-pre"> </span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">6</span><span class="whitespace-pre"><span class="tk-fn">&lt;article</span> class=<span class="tk-str">"mx-auto max-w-narrow"</span>&gt;</span></div>
 <div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">7</span><span class="whitespace-pre">  <span class="tk-fn">&lt;h1</span>&gt;<span class="tk-mu">&#123;&#123; item.title }}</span><span class="tk-fn">&lt;/h1</span>&gt;</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">8</span><span class="whitespace-pre">  <span class="tk-fn">&lt;img</span> src=<span class="tk-str">"&#123;&#123; imgOptimize(item.cover.url, &#123; w: 1200 }) }}"</span> /&gt;</span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">9</span><span class="whitespace-pre">  <span class="tk-mu">&#123;&#123;&#123; item.body }}}</span></span></div>
-<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">10</span><span class="whitespace-pre"><span class="tk-fn">&lt;/article</span>&gt;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">8</span><span class="whitespace-pre">  <span class="tk-fn">&lt;p</span>&gt;<span class="tk-mu">&#123;&#123; item.author.name }}</span><span class="tk-fn">&lt;/p</span>&gt;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">9</span><span class="whitespace-pre">  <span class="tk-fn">&lt;img</span> src="<span class="tk-mu">&#123;&#123; imgOptimize(item.cover.url, &#123; w: 1200 }) }}</span><span class="tk-str">" alt="</span>" /&gt;</span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">10</span><span class="whitespace-pre">  <span class="tk-mu">&#123;&#123;&#123; item.body }}}</span></span></div>
+<div class="flex transition-opacity duration-300"><span class="w-8 shrink-0 select-none pr-3 text-right text-fg-subtle">11</span><span class="whitespace-pre"><span class="tk-fn">&lt;/article</span>&gt;</span></div>
           </div>
           <div x-show="tab === 'agents'" x-cloak class="space-y-3 p-4 text-sm">
-            <div class="ml-auto max-w-xs rounded-card bg-surface px-3 py-2 text-fg">Change the English title of the About page to "About us".</div>
+            <div class="ml-auto max-w-xs rounded-card bg-surface px-3 py-2 text-fg">Change the English title of "Introducing drafts" to "Introducing drafts, explained".</div>
             <div class="space-y-2 font-mono text-xs">
-              <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2 text-fg-muted"><span class="text-primary">{{{ icon('check-circle-duotone', 'size-icon-md') }}}</span><span><span class="text-fg">read_records</span> post · search "about"</span></div>
-              <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2 text-fg-muted"><span class="text-primary">{{{ icon('check-circle-duotone', 'size-icon-md') }}}</span><span><span class="text-fg">update_record</span> post/8x2k · title.en</span></div>
+              <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2 text-fg-muted"><span class="text-primary">{{{ icon('check-circle-duotone', 'size-icon-md') }}}</span><span><span class="text-fg">read_records</span> article · search "drafts"</span></div>
+              <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2 text-fg-muted"><span class="text-primary">{{{ icon('check-circle-duotone', 'size-icon-md') }}}</span><span><span class="text-fg">update_record</span> article/1n1qci8qksoedxu98vv5 · title.en</span></div>
             </div>
             <div class="flex items-start gap-2 text-fg">
               <span class="mt-0.5 text-accent-text">{{{ icon('robot-duotone', 'size-icon-md') }}}</span>
-              <p>Done. Only the English title changed; the Indonesian copy is untouched.</p>
+              <p>Done. Only the English title changed, and only in the draft. Nothing goes live until it is published.</p>
             </div>
             <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs text-fg">
-              <span class="rounded-tag bg-surface px-2 py-1">post:read</span>
-              <span class="rounded-tag bg-surface px-2 py-1">post:update</span>
+              <span class="rounded-tag bg-surface px-2 py-1">article:read</span>
+              <span class="rounded-tag bg-surface px-2 py-1">article:update</span>
               <span class="rounded-tag bg-surface px-2 py-1 text-fg-subtle">no delete</span>
             </div>
           </div>

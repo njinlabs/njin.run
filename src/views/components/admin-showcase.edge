@@ -1,0 +1,46 @@
+{{-- Admin panel showcase: real screenshots (static/screenshots), one tab each. Shots follow the OS light/dark theme via components/shot. --}}
+@let(shots = [
+  { id: 'edit', label: 'Edit form', name: 'article-edit-top', caption: 'A form built from the schema: language tabs, a rich text editor, file upload, and Publish, Unpublish and Discard for drafts.', alt: 'The Article edit form in the njin admin panel, with id and en language tabs, a rich text editor, and Publish, Unpublish and Discard buttons.' },
+  { id: 'list', label: 'Content', name: 'article-rows', caption: 'Sortable, searchable lists with a column picker and filters, for every model.', alt: 'The Article list in the njin admin panel, showing slug, title, excerpt, cover and category columns.' },
+  { id: 'relations', label: 'Relations', name: 'article-relation-picker', caption: 'Relations become pickers that show the label you chose, not an id.', alt: 'The Author relation picker open in the njin admin panel.' },
+  { id: 'access', label: 'Access', name: 'access-group-edit', caption: 'Access groups with per-model grants: read, create, update, delete and publish, for all records or only your own.', alt: 'The access group editor in the njin admin panel, with a grants table per resource.' },
+  { id: 'dashboard', label: 'Dashboard', name: 'dashboard', caption: 'Pageviews, referrers and recent content, with no analytics service to set up.', alt: 'The njin admin dashboard with pageviews, traffic, top pages, referrers and recent content.' }
+])
+
+<section id="admin" class="border-b border-line">
+  <div class="mx-auto max-w-page border-x border-line px-5 py-section sm:px-8 lg:px-12">
+
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="mb-4"><span class="rounded-tag bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-eyebrow text-accent-fg">Admin panel</span></p>
+      <h2 class="text-balance text-display-sm font-heading text-fg">An admin your team can use on day one.</h2>
+      <p class="mt-5 text-lg text-fg-muted">
+        No back office to build. Every model and settings group gets screens for editing, publishing and access control, straight from the schema.
+      </p>
+    </div>
+
+    <div x-data="{ tab: 'edit' }" class="stage mt-block rounded-panel p-2 sm:p-6">
+      <div role="tablist" class="mb-4 flex items-center gap-1 overflow-x-auto">
+        @each(s in shots)
+          <button type="button" role="tab" x-on:click="tab = '{{ s.id }}'" :aria-selected="tab === '{{ s.id }}'" :class="tab === '{{ s.id }}' ? 'bg-surface text-fg' : 'text-fg-muted hover:text-fg'" class="rounded-tag px-3 py-1.5 text-sm font-label whitespace-nowrap">{{ s.label }}</button>
+        @end
+      </div>
+
+      <div class="overflow-hidden rounded-card bg-surface">
+        <div class="tint flex items-center gap-1.5 px-4 py-3" aria-hidden="true">
+          <span class="size-2.5 rounded-full bg-fg-subtle/40"></span><span class="size-2.5 rounded-full bg-fg-subtle/40"></span><span class="size-2.5 rounded-full bg-fg-subtle/40"></span>
+          <span class="ml-3 font-mono text-xs text-fg-subtle">localhost:3000/_admin</span>
+        </div>
+        @each(s in shots)
+          <div x-show="tab === '{{ s.id }}'" @if(s.id !== 'edit') x-cloak @end class="aspect-16/10 overflow-hidden">
+            @!component('components/shot', { name: s.name, alt: s.alt, w: 1800, cls: 'h-full w-full object-cover object-top' })
+          </div>
+        @end
+      </div>
+
+      @each(s in shots)
+        <p x-show="tab === '{{ s.id }}'" @if(s.id !== 'edit') x-cloak @end class="mt-4 px-1 text-sm text-fg-muted">{{ s.caption }}</p>
+      @end
+    </div>
+
+  </div>
+</section>

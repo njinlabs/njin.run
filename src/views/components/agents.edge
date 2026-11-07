@@ -1,9 +1,9 @@
 {{-- AI agents: two hairline cells, each with a layered illustration. No borders inside the illustrations: depth comes from tone (.stage / .tone / .tint in app.css). Convention = stacked file cards (fan out on hover). Deterministic = admin form overlapped by an API window, one field highlighted in all three places. --}}
 @let(cards = [
-  { file: 'config.ts', role: 'config', left: 130, top: 0, tint: 'text-fg-subtle', dot: 'bg-fg-subtle', t: 55 },
-  { file: 'src/models/product.ts', role: 'model', left: 96, top: 56, tint: 'text-fg-subtle', dot: 'bg-primary', t: 70 },
-  { file: 'src/vars/general.ts', role: 'settings', left: 62, top: 112, tint: 'text-fg-subtle', dot: 'bg-info', t: 85 },
-  { file: 'src/views/pages/pricing.edge', role: 'page', left: 28, top: 168, tint: 'text-primary', dot: 'bg-accent', t: 100 }
+  { file: 'config.ts', role: 'config', left: 130, top: 24, tint: 'text-fg-subtle', dot: 'bg-fg-subtle', t: 55 },
+  { file: 'src/models/product.ts', role: 'model', left: 96, top: 80, tint: 'text-fg-subtle', dot: 'bg-primary', t: 70 },
+  { file: 'src/vars/general.ts', role: 'settings', left: 62, top: 136, tint: 'text-fg-subtle', dot: 'bg-info', t: 85 },
+  { file: 'src/views/pages/pricing.edge', role: 'page', left: 28, top: 192, tint: 'text-primary', dot: 'bg-accent', t: 100 }
 ])
 
 <section id="agents" class="border-b border-line">
@@ -25,7 +25,7 @@
         <p class="mt-2 max-w-sm text-fg-muted">Every kind of change has one home, so an agent always knows which file to touch.</p>
 
         <div class="mt-auto pt-8">
-          <div class="stage relative -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 h-80 overflow-hidden lg:-mx-10 lg:-mb-10" aria-hidden="true">
+          <div class="stage relative -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 h-88 overflow-hidden lg:-mx-10 lg:-mb-10" aria-hidden="true">
             <div class="cell-grid absolute inset-0"></div>
             @each((c, i) in cards)
               <div class="stack-card tone absolute h-64 w-110 overflow-hidden rounded-t-card" style="left: {{ c.left }}px; top: {{ c.top }}px; z-index: {{ i + 1 }}; --n: {{ 3 - i }}; --t: {{ c.t }}">
@@ -52,34 +52,12 @@
         <p class="mt-2 max-w-sm text-fg-muted">One definition feeds the API, the admin and the schema, so they cannot drift apart. Same field, same shape, everywhere.</p>
 
         <div class="mt-auto pt-8">
-          <div class="stage relative -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 h-80 overflow-hidden lg:-mx-10 lg:-mb-10" aria-hidden="true">
+          <div class="stage relative -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 h-88 overflow-hidden lg:-mx-10 lg:-mb-10" aria-hidden="true">
             <div class="cell-grid absolute inset-0"></div>
 
-            {{-- admin form (back) --}}
-            <div class="tone absolute left-7 top-7 h-80 w-72 overflow-hidden rounded-card" style="--t: 100">
-              <div class="tint flex items-center justify-between px-4 py-3">
-                <span class="text-sm font-title text-fg">Edit product</span>
-                <span class="rounded-tag bg-warning-soft px-1.5 py-0.5 font-mono text-xs text-warning-soft-fg">draft</span>
-              </div>
-              <div class="space-y-3 p-4">
-                <div>
-                  <p class="mb-1 text-xs font-label text-fg-muted">Title</p>
-                  <div class="rounded-control bg-surface px-3 py-2 text-sm text-fg">Linen tee</div>
-                </div>
-                <div>
-                  <p class="mb-1 text-xs font-label text-fg">Price</p>
-                  <div class="flex items-center justify-between rounded-control bg-brand-100 px-3 py-2 text-sm text-fg dark:bg-brand-900">
-                    120
-                    <span class="font-mono text-xs text-primary-soft-fg">numeric</span>
-                  </div>
-                </div>
-                <div>
-                  <p class="mb-1 text-xs font-label text-fg-muted">Cover</p>
-                  <div class="flex items-center gap-2 rounded-control bg-surface px-3 py-2.5 text-sm text-fg-subtle">
-                    {{{ icon('image-duotone', 'size-icon-md') }}} Drop a file
-                  </div>
-                </div>
-              </div>
+            {{-- admin form (back): a real screenshot of the Product edit form, mobile width --}}
+            <div class="absolute left-7 top-7 h-80 w-72 overflow-hidden rounded-card">
+              @!component('components/shot', { name: 'product-edit-mobile', alt: '', w: 700, cls: 'w-full' })
             </div>
 
             {{-- schema chip (floating) --}}
@@ -94,15 +72,21 @@
                 <span class="size-2.5 rounded-full bg-white/15"></span>
                 <span class="size-2.5 rounded-full bg-white/15"></span>
                 <span class="size-2.5 rounded-full bg-white/15"></span>
-                <span class="ml-3 font-mono text-xs text-neutral-400">GET /api/product/1</span>
+                <span class="ml-3 font-mono text-xs text-neutral-400">GET /api/product/q1tx9jgt9ad0im3c5b1a</span>
               </div>
               <div class="py-3 font-mono text-xs leading-relaxed">
-                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">1</span><span class="text-neutral-200">{</span></p>
-                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">2</span><span class="pl-4 text-neutral-400">"id"<span class="text-neutral-200">: </span><span class="text-brand-200">"8x2k"</span><span class="text-neutral-200">,</span></span></p>
-                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">3</span><span class="pl-4 text-neutral-400">"title"<span class="text-neutral-200">: </span><span class="text-brand-200">"Linen tee"</span><span class="text-neutral-200">,</span></span></p>
-                <p class="flex bg-brand-400/15"><span class="w-9 shrink-0 pr-3 text-right text-brand-300">4</span><span class="pl-4 text-neutral-400">"price"<span class="text-neutral-200">: </span><span class="text-brand-200">120</span><span class="text-neutral-200">,</span></span></p>
-                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">5</span><span class="pl-4 text-neutral-400">"status"<span class="text-neutral-200">: </span><span class="text-brand-200">"draft"</span></span></p>
-                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">6</span><span class="text-neutral-200">}</span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">1</span><span class=""><span class="text-neutral-200">&#123;</span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">2</span><span class="pl-4"><span class="text-neutral-400">"data"<span class="text-neutral-200">: &#123;</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">3</span><span class="pl-8"><span class="text-neutral-400">"createdAt"<span class="text-neutral-200">: </span><span class="text-brand-200">"2026-11-07T05:03:58.864Z"</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">4</span><span class="pl-8"><span class="text-neutral-400">"createdBy"<span class="text-neutral-200">: </span><span class="text-brand-200">"r7lvb3l21q5ui56lnchd"</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">5</span><span class="pl-8"><span class="text-neutral-400">"id"<span class="text-neutral-200">: </span><span class="text-brand-200">"q1tx9jgt9ad0im3c5b1a"</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex bg-brand-400/15"><span class="w-9 shrink-0 pr-3 text-right text-brand-300">6</span><span class="pl-8"><span class="text-neutral-400">"price"<span class="text-neutral-200">: </span><span class="text-brand-200">120</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">7</span><span class="pl-8"><span class="text-neutral-400">"publishedAt"<span class="text-neutral-200">: </span><span class="text-brand-200">null</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">8</span><span class="pl-8"><span class="text-neutral-400">"status"<span class="text-neutral-200">: </span><span class="text-brand-200">"draft"</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">9</span><span class="pl-8"><span class="text-neutral-400">"title"<span class="text-neutral-200">: </span><span class="text-brand-200">"Linen tee"</span><span class="text-neutral-200">,</span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">10</span><span class="pl-8"><span class="text-neutral-400">"updatedAt"<span class="text-neutral-200">: </span><span class="text-brand-200">"2026-11-07T05:03:58.864Z"</span><span class="text-neutral-200"></span></span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">11</span><span class="pl-4"><span class="text-neutral-200">}</span></span></p>
+                <p class="flex"><span class="w-9 shrink-0 pr-3 text-right text-neutral-600">12</span><span class=""><span class="text-neutral-200">}</span></span></p>
               </div>
             </div>
           </div>
@@ -110,5 +94,7 @@
       </div>
 
     </div>
+
+    @!component('components/mcp-clients')
   </div>
 </section>

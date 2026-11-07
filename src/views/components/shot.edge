@@ -1,0 +1,9 @@
+{{-- A real admin panel screenshot. Light/dark variants follow the OS theme. Props: name (file in static/screenshots/{light,dark}), alt, w (width), cls (classes for the img), dark (force the dark variant, for panels that are always dark). --}}
+@let(width = typeof w === 'undefined' ? 1600 : w)
+@let(forceDark = typeof dark !== 'undefined' && dark)
+<picture>
+  @if(!forceDark)
+    <source media="(prefers-color-scheme: dark)" srcset="{{ imgOptimize(vite.static('screenshots/dark/' + name + '.png'), { w: width, q: 82 }) }}" />
+  @end
+  <img src="{{ imgOptimize(vite.static('screenshots/' + (forceDark ? 'dark' : 'light') + '/' + name + '.png'), { w: width, q: 82 }) }}" alt="{{ alt }}" loading="lazy" decoding="async" class="{{ typeof cls === 'undefined' ? '' : cls }}" />
+</picture>
